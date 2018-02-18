@@ -3,6 +3,8 @@
 @section('content')
 <div class="container">
 	<div class="row">
+		@include('layouts.session')
+		@include('layouts.error')
 		<form method="POST" enctype="multipart/form-data" action="{{ route('tags.store')}}" role="form" novalidate>	
 				{{ csrf_field() }}
 				{{-- {{ method_field('POST') }} --}}
@@ -25,21 +27,27 @@
 		</form>
 
 @foreach($tags as $tag)
-<ul>
+<ul class="list-inline">
 	<li>
-		
 		@if( $tag->type == 1)
 		<b>Kategorie</b>
 		@elseif( $tag->type == 2)
 		<b>Zubereitung</b>
-		@elseif( $tag->type == 2)
-		Zeit
-		@elseif( $tag->type == 2)
-		Fleisch
+		@elseif( $tag->type == 3)
+		<b>Zeit</b>
+		@elseif( $tag->type == 4)
+		<b>Fleisch</b>
 		@endif
 		{{ $tag->name }}
 	</li>
-
+	<li><a href="/tags/{{$tag->id}}/edit" class="btn btn-primary">edit</a></li>
+	<li>
+		<form method="POST" enctype="multipart/form-data" action="/tags/{{$tag->id}}" role="form" novalidate>	
+				{{ csrf_field() }}
+				{{ method_field('DELETE') }}
+				<button class="btn btn-danger">delete</button>
+		</form>
+	</li>
 </ul>
 
 @endforeach

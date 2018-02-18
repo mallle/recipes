@@ -40,30 +40,49 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'unique:tags,name|required',
+        ]);
+
         $tag = new Tag;
 
-        $tag->name = $request->get('name');
+        if(!$tag)
+        {
+            return back()->with(['error', 'Tags cannot be found']);
+        } 
 
-        if ($request->get('type') == 'Kategorie')
+        else
         {
-            $tag->type = Tag::TYPE_CATEGORY;
-        }
-        if ($request->get('type') == 'Zubereitung')
-        {
-            $tag->type = Tag::TYPE_PREPERATION;
-        }
-        if ($request->get('type') == 'Zeit')
-        {
-            $tag->type = Tag::TYPE_TIME;
-        }
-        if ($request->get('type') == 'Fleisch')
-        {
-            $tag->type = Tag::TYPE_MEET;
-        }
+            $tag->name = $request->get('name');
 
-        $tag->save();
-
-        return back();
+            if ($request->get('type') == 'Kategorie')
+            {
+                $tag->type = Tag::TYPE_CATEGORY;
+            }
+            if ($request->get('type') == 'Zubereitung')
+            {
+                $tag->type = Tag::TYPE_PREPERATION;
+            }
+            if ($request->get('type') == 'Zeit')
+            {
+                $tag->type = Tag::TYPE_TIME;
+            }
+            if ($request->get('type') == 'Fleisch')
+            {
+                $tag->type = Tag::TYPE_MEET;
+            }
+            if($tag)
+            {
+            $tag->save();
+            return back()->with(['success' => 'Tag was added']);
+            } 
+            if(!$tag)
+            {
+                return back()->with(['error', 'Tag was not added']);
+            }
+        }
+        
     }
 
     /**
@@ -83,9 +102,13 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($tag_id)
     {
-        //
+        $tag = Tag::find($tag_id);
+
+        return view('tags.edit', [
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -97,7 +120,45 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if(!$tag)
+        {
+            return back()->with(['error', 'Tag not found']);
+        } 
+        else
+        {  
+            $tag->name = $request->get('name');
+
+            if ($request->get('type') == 'Kategorie')
+            {
+                $tag->type = Tag::TYPE_CATEGORY;
+            }
+            if ($request->get('type') == 'Zubereitung')
+            {
+                $tag->type = Tag::TYPE_PREPERATION;
+            }
+            if ($request->get('type') == 'Zeit')
+            {
+                $tag->type = Tag::TYPE_TIME;
+            }
+            if ($request->get('type') == 'Fleisch')
+            {
+                $tag->type = Tag::TYPE_MEET;
+            }
+
+            $tag->update();
+
+            if($tag)
+            {
+                return redirect('/tags')->with(['success' => 'Tag was updated']);
+            } 
+            else
+            {
+                return back()->with(['error' => 'Tag was not updated']);
+            }
+        }
+
     }
 
     /**
@@ -108,6 +169,21 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if(!$tag)
+        {
+            return back()->with(['error' => 'Tag not found']);
+        } 
+        elseif($tag)
+        {
+            $tag->delete();
+            return back()->with(['success' => 'Tag was deleted']);
+        } 
+        else
+        {
+            return back()->with(['error' => 'Tag was not deleted']);
+        }
     }
+
 }
