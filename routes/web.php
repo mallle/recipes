@@ -26,11 +26,14 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::get('/tags', 'TagController@create')->name('tag.create');
 	Route::post('/tags/store', 'TagController@store')->name('tags.store');
 	Route::get('/tags/{tag_id}/edit', 'TagController@edit');
-	Route::patch('tags/{id}', 'TagController@update');
-	Route::delete('tags/{id}', 'TagController@destroy');
+	Route::patch('/tags/{id}', 'TagController@update');
+	Route::delete('/tags/{id}', 'TagController@destroy');
 
+	//Ingredients
 	Route::get('/ingredients', 'IngredientController@create')->name('ingredient.create');
 	Route::post('/ingredients/store', 'IngredientController@store')->name('ingredient.store');
-
+	Route::get('/ingredients/{ingredients_id}/edit', 'IngredientController@edit');
+	Route::patch('/ingredients/{id}', 'IngredientController@update');
+	Route::delete('/ingredients/{id}', 'IngredientController@destroy');
 
 });

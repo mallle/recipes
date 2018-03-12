@@ -5,9 +5,17 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-6">
 			@foreach($ingredients as $ingredient)
-				<ul>
+				<ul class="list-inline">
 					<li>
 						{{ $ingredient->name }}
+					</li>
+					<li><a href="/ingredients/{{$ingredient->id}}/edit" class="btn btn-primary">edit</a></li>
+					<li>
+						<form method="POST" enctype="multipart/form-data" action="/ingredients/{{$ingredient->id}}" role="form" novalidate>	
+								{{ csrf_field() }}
+								{{ method_field('DELETE') }}
+								<button class="btn btn-danger">delete</button>
+						</form>
 					</li>
 				</ul>
 			@endforeach

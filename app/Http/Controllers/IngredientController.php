@@ -69,7 +69,12 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+
+        return view('ingredients.edit', [
+            'ingredient' => $ingredient,
+        ]);
+       
     }
 
     /**
@@ -81,7 +86,28 @@ class IngredientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $ingredient = Ingredient::find($id);
+
+        if(!$ingredient)
+        {
+            return back()->with(['error', 'Ingredient not found']);
+        } 
+        else
+        {  
+            $ingredient->name = $request->get('name');
+
+            $ingredient->update();
+
+            if($ingredient)
+            {
+                return redirect('/ingredients')->with(['success' => 'Ingredient was updated']);
+            } 
+            else
+            {
+                return back()->with(['error' => 'Ingredient was not updated']);
+            }
+        }
     }
 
     /**
@@ -92,6 +118,20 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $ingredient = Ingredient::find($id);
+
+        if(!$ingredient)
+        {
+            return back()->with(['error' => 'Ingredient not found']);
+        } 
+        elseif($ingredient)
+        {
+            $ingredient->delete();
+            return back()->with(['success' => 'Ingredient was deleted']);
+        } 
+        else
+        {
+            return back()->with(['error' => 'Ingredient was not deleted']);
+        }
     }
 }
