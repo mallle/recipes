@@ -10,11 +10,11 @@ class Recipe extends Model
 {
     public function tags()
     {
-    	$this -> belongsToMany('\App\Tag', 'recipe_tag', 'recipe_id', 'tag_id');
+    	return $this -> belongsToMany('\App\Tag', 'recipe_tag', 'recipe_id', 'tag_id');
     }
 
     public function ingredients()
     {
-    	$this -> belongsToMany('\App\Ingredient', 'recipe_ingredient', 'recipe_id', 'ingredient_id');
+    	return $this -> belongsToMany('\App\Ingredient', 'recipe_ingredient', 'recipe_id', 'ingredient_id');
     }
 }

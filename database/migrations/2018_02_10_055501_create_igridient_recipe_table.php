@@ -13,10 +13,10 @@ class CreateIgridientRecipeTable extends Migration
      */
     public function up()
     {
-        Schema::create('igridient_recipe', function (Blueprint $table) {
+        Schema::create('recipe_igridient', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('recipe_id');
-            $table->integer('igrdient_id');
+            $table->integer('ingredient_id');
             $table->integer('amount');
             $table->integer('type');
             $table->timestamps();

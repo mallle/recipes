@@ -75,7 +75,7 @@ class TagController extends Controller
             if($tag)
             {
             $tag->save();
-            return back()->with(['success' => 'Tag was added']);
+                return back()->with(['success' => 'Tag was added']);
             } 
             if(!$tag)
             {

@@ -9,6 +9,6 @@ class Ingredient extends Model
 {
     public function recipes()
     {
-    	$this -> belongsToMany('\App\Recipe', 'ingredient_recipe', 'ingredient_id', 'recipe_id');
+    	return $this -> belongsToMany('\App\Recipe', 'ingredient_recipe', 'ingredient_id', 'recipe_id');
     }
 }

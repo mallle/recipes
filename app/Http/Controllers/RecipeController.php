@@ -16,7 +16,11 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipe::orderBy('name')->get();
+
+        return view('recipes.index', [
+            'recipes' => $recipes
+        ]);
     }
 
     /**
@@ -26,10 +30,13 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        $ingredients = Ingredient::oderBy('name')->get();
-        $tags = Tag::oderBy('type')->get();
+        $ingredients = Ingredient::orderBy('name')->get();
+        $tags = Tag::orderBy('type')->get();
 
-        return view('recipes.create');
+        return view('recipes.create', [
+            'ingredients' => $ingredients,
+            'tags' => $tags
+        ]);
 
     }
 
@@ -44,7 +51,14 @@ class RecipeController extends Controller
         $recipe = new Recipe;
 
         $recipe->name = $request->get('name');
-        $
+        $recipe->persons = $request->get('persons');
+        $recipe->description = $request->get('description');
+        $recipe->time = $request->get('time');
+
+        $recipe->save();
+
+        return redirect('recipes');
+        
     }
 
     /**
@@ -55,7 +69,15 @@ class RecipeController extends Controller
      */
     public function show($id)
     {
-        //
+        $recipe = Recipe::find($id);
+        $tags = Tag::orderBy('name')->get();
+        $ingredients = Ingredient::orderBy('name')->get();
+
+        return view('recipes.show', [
+            'recipe' => $recipe,
+            'tags' => $tags,
+            'ingredients' => $ingredients
+        ]);
     }
 
     /**
