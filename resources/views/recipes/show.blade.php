@@ -58,23 +58,6 @@
 						</li>
 					</ul>
 				@endforeach
-
-
-
-
-				{{-- <h3>Ingredients</h3>
-				@foreach($recipe->ingredients as $ingredient)
-					<ul class="list-inline">
-						<li>{{$ingredient->name}}</li>
-						<li>
-							<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
-									{{ csrf_field() }}
-									{{ method_field('DELETE') }}
-									<button class="btn btn-danger">Delete</button>
-							</form>
-						</li>
-					</ul>
-				@endforeach --}}
 			</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	        <div class="panel panel-default">

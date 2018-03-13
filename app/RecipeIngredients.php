@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Recipe;
 
 class RecipeIngredients extends Model
 {
@@ -13,6 +14,14 @@ class RecipeIngredients extends Model
     const TYPE_LITER = 5;
     const TYPE_DECILITER = 6;
     const TYPE_PACKUNG = 7;
+
+    public static function amount($amount, $recipe_id)
+    {
+    	$recipe = Recipe::find($recipe_id);
+    	$persons = $recipe->persons;
+    	$amount = $amount;
+    	return $amount/$persons;
+    }
 
 
     public static function getTypeNumber($type)

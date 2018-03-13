@@ -17,7 +17,7 @@ class CreateIgridientRecipeTable extends Migration
             $table->increments('id');
             $table->integer('recipe_id');
             $table->integer('ingredient_id');
-            $table->integer('amount');
+            $table->double('amount', 8, 2);
             $table->integer('type');
             $table->timestamps();
         });
