@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Recipe;
+use App\RecipeIngredients;
 
 class RecipesIngredientsController extends Controller
 {
@@ -25,16 +26,17 @@ class RecipesIngredientsController extends Controller
 
     }
 
-        public function attach(\Illuminate\Http\Request $request, $recipe_id)
+    public function attach(\Illuminate\Http\Request $request, $recipe_id)
     {
         $recipe = Recipe::find($recipe_id);
 
         $ingredient_id = $request->get("ingredient_id");
-
-        if (! $recipe->ingredients()->syncWithoutDetaching([$ingredient_id]))
-        {
-            $recipe->ingredients()->attach($ingredient_id);
-        }
+        $array = [
+                'amount' => $request->get("amount"),
+                'type' => RecipeIngredients::getTypeNumber($request->get('type'))   
+            ];
+            
+        $recipe->ingredients()->attach($ingredient_id, $array);
 
         if ($recipe) 
         {

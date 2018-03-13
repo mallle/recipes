@@ -10,6 +10,39 @@
 				<p>Persons: {{ $recipe->persons}}</p>
 				<p>{{ $recipe->time}} Min</p>
 				<p>{{ $recipe->description}}</p>
+				
+				<h3>Ingredients</h3>
+				@foreach($recipe->ingredients as $ingredient)
+					<ul class="list-inline">
+
+						<li>{{$ingredient->name}}</li>
+						<li>{{$ingredient->pivot->amount}}</li>
+						<li>
+							@if($ingredient->pivot->type === App\RecipeIngredients::TYPE_GRAMM)
+							Gramm
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_STÜCK)
+							Stück
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_TEELÖFFEL)
+							Teelöffel
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_ESSLÖFFEL)
+							Esslöffel
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_LITER)
+							Liter
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_DECILITER)
+							Deciliter
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_PACKUNG)
+							Packung
+							@endif
+						</li>
+						<li>
+							<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
+									{{ csrf_field() }}
+									{{ method_field('DELETE') }}
+									<button class="btn btn-danger">Delete</button>
+							</form>
+						</li>
+					</ul>
+				@endforeach
 
 
 				<h3>Tags</h3>
@@ -25,6 +58,8 @@
 						</li>
 					</ul>
 				@endforeach
+
+
 
 
 				{{-- <h3>Ingredients</h3>
