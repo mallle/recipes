@@ -7,6 +7,17 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<h1>{{ $recipe->name}} </h1>
+				<ul class="list-inline">
+					<li><a href="/recipes/{{$recipe->id}}/edit" class="btn btn-primary">Edit</a></li>
+					<li>
+						<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}" role="form" novalidate>	
+								{{ csrf_field() }}
+								{{ method_field('DELETE') }}
+								<button class="btn btn-danger">Delete</button>
+						</form>
+					</li>
+				</ul>
+				
 				<p>Persons: {{ $recipe->persons}}</p>
 				<p>{{ $recipe->time}} Min</p>
 				<p>{{ $recipe->description}}</p>
@@ -16,7 +27,6 @@
 					<ul class="list-inline">
 
 						<li>{{$ingredient->name}}</li>
-						{{-- {{dd(App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id))}} --}}
 						<li>{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}}</li>
 						<li>
 							@if($ingredient->pivot->type === App\RecipeIngredients::TYPE_GRAMM)

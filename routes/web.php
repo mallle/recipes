@@ -36,16 +36,14 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::patch('/ingredients/{id}', 'IngredientController@update');
 	Route::delete('/ingredients/{id}', 'IngredientController@destroy');
 
-
 	//Recipes 
-	Route::get('recipes/', 'RecipeController@index');
+	Route::get('recipes/', 'RecipeController@index')->name('recipes');
 	Route::get('/recipes/create', 'RecipeController@create')->name('recipes.create');
 	Route::get('/recipes/{id}', 'RecipeController@show');
 	Route::post('/recipes/store', 'RecipeController@store')->name('recipes.store');
 	Route::get('/recipes/{tag_id}/edit', 'RecipeController@edit');
 	Route::patch('/recipes/{id}', 'RecipeController@update');
 	Route::delete('/recipes/{id}', 'RecipeController@destroy');
-
 
 	//RecipeTag
 	Route::post('/recipes/{recipe_id}/attach_tag', 'RecipesTagsController@attach');

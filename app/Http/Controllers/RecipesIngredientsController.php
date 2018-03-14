@@ -25,11 +25,11 @@ class RecipesIngredientsController extends Controller
 
         if ($recipe) 
         {
-            return redirect('recipes/' . $recipe_id)->with(['message' => 'Attach was successful']);
+            return redirect('recipes/' . $recipe_id)->with(['success' => 'Attach was successful']);
         } 
         else
         {
-            return back()->with(['message' => 'Error not atached!']);
+            return back()->with(['error' => 'Error not atached!']);
         }
     }
 
@@ -42,11 +42,11 @@ class RecipesIngredientsController extends Controller
 
         if ($recipe) 
         {
-            return back()->with(['message' => 'Detach was successful']);
+            return back()->with(['succes' => 'Detach was successful']);
         } 
         else 
         {
-            return back()->with(['message' => 'Error not detached!']);
+            return back()->with(['error' => 'Error not detached!']);
         }
     }
 

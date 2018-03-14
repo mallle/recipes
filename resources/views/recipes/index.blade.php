@@ -5,10 +5,12 @@
 	<div class="row">
 		@include('layouts.session')
 		@include('layouts.error')
-		@foreach($recipes as $recipe)
-    <ul>
-      <li>{{ $recipe->name}}</li>
-    </ul>
-    @endforeach
 
+		<h1>All Recipes</h1>
+		<a href="recipes/create">Add new recipe</a>
+		@foreach($recipes as $recipe)
+		<ul class="list-inline">
+			<li><a href="/recipes/{{$recipe->id}}">{{ $recipe->name}}</a></li>
+		</ul>
+    @endforeach
 @endsection	
