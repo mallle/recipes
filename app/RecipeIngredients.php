@@ -13,9 +13,10 @@ class RecipeIngredients extends Model
     const TYPE_ESSLÖFFEL = 4;
     const TYPE_LITER = 5;
     const TYPE_DECILITER = 6;
-    const TYPE_PACKUNG = 7;
+    const TYPE_MILLILITER = 7;
+    const TYPE_PACKUNG = 8;
 
-    public static function amount($amount, $recipe_id)
+    public static function amountOnePerson($amount, $recipe_id)
     {
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
@@ -23,6 +24,13 @@ class RecipeIngredients extends Model
     	return $amount/$persons;
     }
 
+    public static function amountPersons($amount, $recipe_id)
+    {
+    	$recipe = Recipe::find($recipe_id);
+    	$persons = $recipe->persons;
+    	$amount = $amount;
+    	return $amount*$persons;
+    }
 
     public static function getTypeNumber($type)
     {
@@ -40,8 +48,10 @@ class RecipeIngredients extends Model
     			return '5';
     		case 'Deciliter':
     			return '6';
-    		case 'Packung':
+    		case 'Milliliter':
     			return '7';
+    		case 'Packung':
+    			return '8';
     		default:
     			return 'undefined';
     	}

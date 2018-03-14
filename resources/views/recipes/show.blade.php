@@ -16,7 +16,8 @@
 					<ul class="list-inline">
 
 						<li>{{$ingredient->name}}</li>
-						<li>{{$ingredient->pivot->amount}}</li>
+						{{-- {{dd(App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id))}} --}}
+						<li>{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}}</li>
 						<li>
 							@if($ingredient->pivot->type === App\RecipeIngredients::TYPE_GRAMM)
 							Gramm
@@ -30,6 +31,8 @@
 							Liter
 							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_DECILITER)
 							Deciliter
+							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_MILLILITER)
+							Milliliter
 							@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_PACKUNG)
 							Packung
 							@endif
@@ -128,6 +131,7 @@
 													  <option>Esslöffel</option>
 													  <option>Liter</option>
 													  <option>Deciliter</option>
+													  <option>Milliliter</option>
 													  <option>Packung</option>
 													</select>
 												</div>

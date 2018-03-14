@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Ingredient;
 use App\Tag;
 use App\Recipe;
+use App\RecipeIngredients;
 
 class RecipeController extends Controller
 {

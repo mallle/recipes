@@ -12,7 +12,7 @@ class RecipesIngredientsController extends Controller
     {
         $recipe = Recipe::find($recipe_id);
 
-        $amount = RecipeIngredients::amount($request->get("amount"), $recipe_id);
+        $amount = RecipeIngredients::amountOnePerson($request->get("amount"), $recipe_id);
 
 
         $ingredient_id = $request->get("ingredient_id");
