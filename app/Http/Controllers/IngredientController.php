@@ -29,7 +29,7 @@ class IngredientController extends Controller
 
         return view('ingredients.create', [
             'ingredients' => $ingredients,
-        ]);
+        ]); 
 
     }
 
@@ -43,11 +43,20 @@ class IngredientController extends Controller
     {
         $ingredient = new Ingredient;
 
-        $ingredient->name = $request->get('name');
+        if(!$ingredient)
+        {
+            return back()->with(['error', 'Ingredient cannot be initialized']);
+        } 
+        else
+        {
+            $ingredient->name = $request->get('name');
 
-        $ingredient->save();
+            $ingredient->save();
 
-        return back();
+            return back()->with(['success' => 'Ingredient was added']);  
+        }
+
+        
     }
 
     /**

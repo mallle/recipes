@@ -12,8 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
 </head>
-<body>
+<body style="background-color: #eee">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
