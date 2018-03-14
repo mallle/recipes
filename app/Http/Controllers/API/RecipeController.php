@@ -21,6 +21,8 @@ class RecipeController extends Controller
         	$data[] = [
         		'id' => $recept->id,
         		'name' => $recept->name,
+                'persons' => $recept->persons,
+                'description' => $recept->description,
                 'zutaten' => $recept->ingredients,
                 'tags' => $recept->tags
         	];
