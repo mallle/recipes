@@ -14,17 +14,43 @@ class RecipeController extends Controller
 
         $recipes = Recipe::orderBy('name')->get();
 
-		// return $categories;        
-
-        foreach($recipes as $recept)
+		// return $categories;       
+        
+        foreach($recipes as $recipe)
         {
+            $ingredients = [];
+            foreach ($recipe->ingredients as $ingredient) {
+                  $ingredients[] = [
+                    'name' => $ingredient->name,
+                    'amount' => $ingredient->pivot->amount,
+                    'type' => $ingredient->pivot->type,
+                  ];
+            } 
+
+            $descriptions = [];
+            foreach ($recipe->descriptions as $description) {
+                  $descriptions[] = [
+                    'descriptionnumber' => $description->descriptionnumber,
+                    'description' => $description->description,
+                  ];
+            } 
+
         	$data[] = [
-        		'id' => $recept->id,
-        		'name' => $recept->name,
-                'persons' => $recept->persons,
-                'description' => $recept->descriptions,
-                'zutaten' => $recept->ingredients,
-                'tags' => $recept->tags
+        		'id' => $recipe->id,
+        		'name' => $recipe->name,
+                'persons' => $recipe->persons,
+                'preparationtime' => $recipe->preparationtime,
+                'resttime' => $recipe->resttime,
+                'bakingtime' => $recipe->bakingtime,
+                'effort' => $recipe->effort,
+                'image' => $recipe->image,
+                'description' => [
+                        $descriptions
+                    ],
+                'ingredients' => [
+                        $ingredients
+                    ],
+                'tags' => $recipe->tags
         	];
 
         }

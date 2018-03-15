@@ -18,7 +18,7 @@
 						{{ csrf_field() }}
 						
 		                <div class="form-group">
-		                  	<input type="text" class="form-control" id="name" name="name" placeholder="Zutat">
+		                  	<input type="text" class="form-control" id="name" name="name" placeholder="Untensiel">
 		                </div>
 						<div class="box-footer text-right">
 							<button type="submit" class="btn btn-primary">Hinzufügen</button>

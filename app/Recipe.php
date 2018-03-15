@@ -14,7 +14,7 @@ class Recipe extends Model
     //Relations
     public function equipments()
     {
-        return $this -> belongsToMany('\App\Equipment', 'equipment_recipe', 'recipe_id', 'equipment_id');
+        return $this -> belongsToMany('\App\Equipment', 'equipment_recipe', 'equipment_id', 'recipe_id');
     }
 
     public function tags()

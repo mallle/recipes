@@ -109,7 +109,7 @@ class EquipmentController extends Controller
             } 
             else
             {
-                return back()->with(['error' => 'Equipment was not updated']);
+                return back()->with(['error' => 'EquipmentControllerquipment was not updated']);
             }
         }
     }

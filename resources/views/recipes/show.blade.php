@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron">
+	<div class="jumbotron" style="background-image:url({{$recipe->getImage()}});height:400px">
 	  	<h1 class="text-center">{{$recipe->name}}</h1>
 	</div>
 
@@ -16,13 +16,10 @@
 				<div class="panel-body">
 
 					<div class="row">
-						<div class="col-xs-4 col-sm-4 col-md-4">
+						<div class="col-xs-6 col-sm-6 col-md-6">
 							<p><i class="fas fa-users"></i> {{ $recipe->persons}}</p>
 						</div>
-						<div class="col-xs-4 col-sm-4 col-md-4">
-							<p><i class="fas fa-clock"></i> {{ $recipe->time}}</p>
-						</div>
-						<div class="col-xs-4 col-sm-4 col-md-4">
+						<div class="col-xs-6 col-sm-6 col-md-6">
 							<ul class="list-inline text-right">
 								<li><a href="/recipes/{{$recipe->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a></li>
 								<li>
@@ -35,7 +32,20 @@
 							</ul>
 						</div>
 					</div>
-					
+					<ul class="list-inline">
+						<li>
+							<p><i class="fas fa-clock"></i> {{ $recipe->totalPreparationtime()}} Insgesamt</p>
+						</li>
+						<li>
+							<p><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
+						</li>
+						<li>
+							<p><i class="fas fa-clock"></i> {{ $recipe->resttime}} Ruhezeit</p>
+						</li>
+						<li>
+							<p><i class="fas fa-clock"></i> {{ $recipe->bakingtime}} Backzeit</p>
+						</li>
+					</ul>
 					<h4>Zutaten</h4>
 					<table class="table">
 						
@@ -76,11 +86,47 @@
 					</table>
 					<hr>
 					<h4>Anleitung</h4>
-					<p>{{ $recipe->description }}</p>
+					@foreach($descriptions as $description)
+						<ul class="list-inline">
+							<li>{{$description->descriptionnumber}}. {{ $description->description }}
+							</li>
+							<li>
+								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
+							</li>
+							<li>
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}/" role="form" novalidate>	
+										{{ csrf_field() }}
+										{{ method_field('DELETE') }}
+									<button class="btn"><i class="fas fa-trash-alt"></i></button>
+								</form>
+							</li>
+						</ul>
+					@endforeach
+					<hr>
+					<h4>Utensilien</h4>
+					<table class="table">
+						@foreach($recipe->equipments as $equipment)
+						<tr>
+							<td>
+								<ul class="list-inline">
+									<li>
+										<i class="fas fa-tag"></i> {{$equipment->name}}
+									</li>
+									<li>
+										<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_equipment/{{$equipment->id}}" role="form" novalidate>	
+										{{ csrf_field() }}
+										{{ method_field('DELETE') }}
+										<button class="btn"><i class="fas fa-trash-alt"></i></button>
+										</form>
+									</li>
+								</ul>
+							</td>
+						</tr>
+						@endforeach
+					</table>
 					<hr>
 					<h4>Tags</h4>
 					<table class="table">
-						
 						@foreach($recipe->tags as $tag)
 						<tr>
 							<td>
@@ -121,8 +167,8 @@
 		                    </select>
 	               		</div>
 						<div class="form-group">
-		                  	<label for="amount">Amount</label>
-		                  	<input type="text" class="form-control" id="amount" name="amount" placeholder="Amount">
+		                  	<label for="amount">Menge</label>
+		                  	<input type="text" class="form-control" id="amount" name="amount" placeholder="Menge">
 		                </div>
 		                <div class="form-group">
 							<select name="type" class="form-control">
@@ -142,7 +188,47 @@
 			</div>
 			<div class="panel panel-primary">
 				  <div class="panel-heading">
-				    <h3 class="panel-title">Neue Tags hinzufügen</h3>
+				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
+				  </div>
+				<div class="panel-body">
+					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
+                            {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                        <div class="form-group">
+		                  	<label for="descriptionnumber">Anleitungs schrit nummer: </label>
+		                  	<input type="text" class="form-control" id="descriptionnumber" name="descriptionnumber" placeholder="1, 2, 3...">
+		                </div>
+						<div class="form-group">
+		                  	<label for="description">Anleitungsschritt</label>
+		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
+		                </div>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                </form>
+		        </div>
+			</div>
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Utensilien hinzufügen</h3>
+				  </div>
+				<div class="panel-body">
+					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_equipment" role="form" novalidate>  
+	                            {{ csrf_field() }}
+	                            {{ method_field('POST') }}
+			                <div class="form-group">
+		                    <select name="equipment_id">
+		                        <option selected disabled>Wähle untensilien</option>
+		                        @foreach($equipments as $equipment)
+		                            <option value="{{$equipment->id}}">{{$equipment->name}}</option>
+		                        @endforeach
+		                    </select>
+	               		</div>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                </form>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Tags hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
 					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_tag" role="form" novalidate>  
@@ -164,154 +250,3 @@
 	</div>
 </div>
 @endsection
-
-
-
-
-
-
-
-
-
-
-{{-- 
-
-
-
-
-
-
-
-
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-		@include('layouts.session')
-		@include('layouts.error')
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<h1>{{ $recipe->name}} </h1>
-				<ul class="list-inline">
-					<li><a href="/recipes/{{$recipe->id}}/edit" class="btn" ><i class="fas fa-edit"></i>
-
-</a></li>
-					<li>
-						<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}" role="form" novalidate>	
-								{{ csrf_field() }}
-								{{ method_field('DELETE') }}
-								<button type="submit" class="btn" style="background:aliceblue"><i class="fas fa-trash-alt"></i></button>
-						</form>
-					</li>
-				</ul>
-				
-				<p>Persons: {{ $recipe->persons}}</p>
-				<p>{{ $recipe->time}} Min</p>
-				<p>{{ $recipe->description}}</p>
-				
-				<h3>Ingredients</h3>
-				
-
-
-				<h3>Tags</h3>
-				@foreach($recipe->tags as $tag)
-					<ul class="list-inline">
-						<li>{{$tag->name}}</li>
-						<li>
-							<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_tag/{{$tag->id}}" role="form" novalidate>	
-									{{ csrf_field() }}
-									{{ method_field('DELETE') }}
-									<button class="btn btn-danger">Delete</button>
-							</form>
-						</li>
-					</ul>
-				@endforeach
-			</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        <div class="panel panel-default">
-	            <div class="panel-body">
-	                <div class="panel-body">
-                		<table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Tags</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            	<tr>
-                            		<td>
-                            			<div class="box box-primary">
-						                	<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_tag" role="form" novalidate>  
-						                            {{ csrf_field() }}
-						                            {{ method_field('POST') }}
-						                        <div class="form-group">
-								                    <select name="tag_id">
-								                        <option selected disabled>Wähle Tags</option>
-								                        @foreach($tags as $tag)
-								                            <option value="{{$tag->id}}">{{$tag->name}}</option>
-								                        @endforeach
-								                    </select>
-							               		</div>
-							                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
-							                </form>
-									    </div> 
-                            		</td>
-                            	</tr>
-                            </tbody>
-                        </table>
-		          	</div>
-		        </div>
-	            <div class="panel-body">
-	                <div class="panel-body">
-                		<table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Ingredients</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            	<tr>
-                            		<td>
-                            			<div class="box box-primary">
-						                	<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_ingredient" role="form" novalidate>  
-						                            {{ csrf_field() }}
-						                            {{ method_field('POST') }}
-						                        <div class="form-group">
-								                    <select name="ingredient_id">
-								                        <option selected disabled>Wähle Ingredients</option>
-								                        @foreach($ingredients as $ingedient)
-								                            <option value="{{$ingedient->id}}">{{$ingedient->name}}</option>
-								                        @endforeach
-								                    </select>
-							               		</div>
-												<div class="form-group">
-								                  	<label for="amount">Amount</label>
-								                  	<input type="text" class="form-control" id="amount" name="amount" placeholder="Amount">
-								                </div>
-								                <div class="form-group">
-													<select name="type" class="form-control">
-													  <option>Gramm</option>
-													  <option>Stück</option>
-													  <option>Teelöffel</option>
-													  <option>Esslöffel</option>
-													  <option>Liter</option>
-													  <option>Deciliter</option>
-													  <option>Milliliter</option>
-													  <option>Packung</option>
-													</select>
-												</div>
-							                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
-							                </form>
-									    </div> 
-                            		</td>
-                            	</tr>
-                            </tbody>
-                        </table>
-		          	</div>
-		        </div>
-		    </div>		
-		</div>
-		 <a href="/recipes" value="upload" class="btn btn-primary">Zurück</a>
-	</div>
-
-@endsection	 --}}

@@ -54,6 +54,12 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::patch('/equipments/{id}', 'EquipmentController@update');
 	Route::delete('/equipments/{id}', 'EquipmentController@destroy');
 
+	//Descriptions
+	Route::post('/descriptions/store/{recipe_id}', 'DescriptionController@store');
+	Route::get('/descriptions/{equipment_id}/edit', 'DescriptionController@edit');
+	Route::patch('/descriptions/{id}', 'DescriptionController@update');
+	Route::delete('/descriptions/{id}', 'DescriptionController@destroy');
+
 	//RecipeTag
 	Route::post('/recipes/{recipe_id}/attach_tag', 'RecipesTagsController@attach');
 	Route::delete('/recipes/{recipe_id}/detach_tag/{tag_id}', 'RecipesTagsController@detach');
@@ -61,5 +67,9 @@ Route::group(['middleware'=>'auth'], function(){
 	//RecipeIngredient
 	Route::post('/recipes/{recipe_id}/attach_ingredient', 'RecipesIngredientsController@attach');
 	Route::delete('/recipes/{recipe_id}/detach_ingredient/{ingredient_id}', 'RecipesIngredientsController@detach');
+
+	//RecipeEquipment
+	Route::post('/recipes/{recipe_id}/attach_equipment', 'EquipmentRecipeController@attach');
+	Route::delete('/recipes/{recipe_id}/detach_equipment/{equipment_id}', 'EquipmentRecipeController@detach');
 
 });

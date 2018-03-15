@@ -7,6 +7,8 @@ use App\Ingredient;
 use App\Tag;
 use App\Recipe;
 use App\RecipeIngredients;
+use App\Description;
+use App\Equipment;
 
 class RecipeController extends Controller
 {
@@ -32,11 +34,9 @@ class RecipeController extends Controller
     public function create()
     {
         $ingredients = Ingredient::orderBy('name')->get();
-        $tags = Tag::orderBy('type')->get();
 
         return view('recipes.create', [
             'ingredients' => $ingredients,
-            'tags' => $tags
         ]);
 
     }
@@ -77,12 +77,16 @@ class RecipeController extends Controller
     public function show($id)
     {
         $recipe = Recipe::find($id);
+        $descriptions = $recipe->descriptions()->orderBy('descriptionnumber')->get();
         $tags = Tag::orderBy('name')->get();
+        $equipments = Equipment::orderBy('name')->get();
         $ingredients = Ingredient::orderBy('name')->get();
 
         return view('recipes.show', [
             'recipe' => $recipe,
+            'descriptions' => $descriptions,
             'tags' => $tags,
+            'equipments' => $equipments,
             'ingredients' => $ingredients
         ]);
     }

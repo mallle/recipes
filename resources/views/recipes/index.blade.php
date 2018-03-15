@@ -21,6 +21,9 @@
 					<p><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
 					<p><i class="fas fa-clock"></i> {{ $recipe->resttime}} Ruhezeit</p>
 					<p><i class="fas fa-clock"></i> {{ $recipe->bakingtime}} Backzeit</p>
+					@foreach($recipe->equipments as $equipment)
+						{{ $equipment->name}}, 
+					@endforeach
 					@foreach($recipe->tags as $tag)
 						<p><i class="fas fa-tag"></i> {{ $tag->name}} </p>
 					@endforeach

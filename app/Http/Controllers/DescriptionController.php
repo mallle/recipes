@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Recipe;
+use App\Description;
 
 class DescriptionController extends Controller
 {
@@ -23,7 +25,7 @@ class DescriptionController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -32,9 +34,24 @@ class DescriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $recipe_id)
     {
-        //
+        $description = new Description;
+
+        if(!$description)
+        {
+            return back()->with(['error', 'Description cannot be initialized']);
+        } 
+        else
+        {
+            $description->description = $request->get('description');
+            $description->descriptionnumber = $request->get('descriptionnumber');
+            $description->recipe_id = $recipe_id;
+
+            $description->save();
+
+            return back()->with(['success' => 'Description was added']);  
+        }
     }
 
     /**
@@ -56,7 +73,11 @@ class DescriptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $description = Description::find($id);
+
+        return view('descriptions.edit', [
+            'description' => $description,
+        ]);
     }
 
     /**
@@ -68,7 +89,27 @@ class DescriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $description = Description::find($id);
+
+        if(!$description)
+        {
+            return back()->with(['error', 'Description not found']);
+        } 
+        else
+        {  
+            $description->description = $request->get('description');
+            $description->descriptionnumber = $request->get('descriptionnumber');
+            $description->update();
+
+            if($description)
+            {
+                return redirect('/recipes/' . $description->recipe_id)->with(['success' => 'Description was updated']);
+            } 
+            else
+            {
+                return back()->with(['error' => 'Description was not updated']);
+            }
+        }
     }
 
     /**
@@ -79,6 +120,20 @@ class DescriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $description = Description::find($id);
+
+        if(!$description)
+        {
+            return back()->with(['error' => 'Description not found']);
+        } 
+        elseif($description)
+        {
+            $description->delete();
+            return back()->with(['success' => 'Description was deleted']);
+        } 
+        else
+        {
+            return back()->with(['error' => 'Description was not deleted']);
+        }
     }
 }
