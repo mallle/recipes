@@ -3,26 +3,31 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Hello Bulma!</title>
+		<title>Meine Rezepte</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	</head>
 	<body>
 		<section class="section" id="app">
 			<div class="container">
-			  <h1 class="title" v-for="rezept in recipes">
+			  <h1 class="title" v-for="recipe in recipes">
 			  	<ul>
 			  		<li>
-			  			Rezept: @{{ rezept.name}}
+			  			Rezept: @{{ recipe.name}}
 			  		</li>
 			  		<li>
-			  			Personen: @{{ rezept.persons}}
+			  			Personen: @{{ recipe.persons}}
 			  		</li>
 			  		<li>
-			  			@{{ rezept.ingredient_id}}
+			  			<img src=""> @{{ recipe.persons}}
 			  		</li>
-
-			  		<li v-for="tag in rezept.tags">
+			  		<li v-for="description in recipe.descriptions">
+			  			@{{ description.descriptionnumber }}. @{{ description.description}}
+			  		</li>
+			  		<li v-for="ingredient in recipe.ingredients">
+			  			@{{ ingredient.name }} Amount:@{{ ingredient.amount}} @{{ingredient.type}}
+			  		</li>
+			  		<li v-for="tag in recipe.tags">
 			  			@{{ tag.name }}
 			  		</li>
 			  		

@@ -28,7 +28,7 @@ class RecipeController extends Controller
             } 
 
             $descriptions = [];
-            foreach ($recipe->descriptions as $description) {
+            foreach ($recipe->descriptions()->orderBy('descriptionnumber')->get() as $description) {
                   $descriptions[] = [
                     'descriptionnumber' => $description->descriptionnumber,
                     'description' => $description->description,
@@ -44,12 +44,8 @@ class RecipeController extends Controller
                 'bakingtime' => $recipe->bakingtime,
                 'effort' => $recipe->effort,
                 'image' => $recipe->image,
-                'description' => [
-                        $descriptions
-                    ],
-                'ingredients' => [
-                        $ingredients
-                    ],
+                'descriptions' => $descriptions,
+                'ingredients' => $ingredients,
                 'tags' => $recipe->tags
         	];
 
