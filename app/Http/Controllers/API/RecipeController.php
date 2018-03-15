@@ -22,7 +22,7 @@ class RecipeController extends Controller
         		'id' => $recept->id,
         		'name' => $recept->name,
                 'persons' => $recept->persons,
-                'description' => $recept->description,
+                'description' => $recept->descriptions,
                 'zutaten' => $recept->ingredients,
                 'tags' => $recept->tags
         	];

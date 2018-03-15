@@ -15,10 +15,13 @@ class CreateRecipesTable extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->double('persons', 8, 2);
-            $table->text('description');
-            $table->integer('time');
+            $table->integer('preparationtime');
+            $table->integer('resttime');
+            $table->integer('bakingtime');
+            $table->string('effort');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

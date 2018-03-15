@@ -47,6 +47,13 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::patch('/recipes/{id}', 'RecipeController@update');
 	Route::delete('/recipes/{id}', 'RecipeController@destroy');
 
+	//Equipments
+	Route::get('/equipments', 'EquipmentController@create')->name('equipments.create');
+	Route::post('/equipments/store', 'EquipmentController@store')->name('equipments.store');
+	Route::get('/equipments/{equipment_id}/edit', 'EquipmentController@edit');
+	Route::patch('/equipments/{id}', 'EquipmentController@update');
+	Route::delete('/equipments/{id}', 'EquipmentController@destroy');
+
 	//RecipeTag
 	Route::post('/recipes/{recipe_id}/attach_tag', 'RecipesTagsController@attach');
 	Route::delete('/recipes/{recipe_id}/detach_tag/{tag_id}', 'RecipesTagsController@detach');

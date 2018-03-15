@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ingredient;
+use App\Equipment;
 
-class IngredientController extends Controller
+class EquipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,11 +24,10 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        
-        $ingredients = Ingredient::orderBy('name')->get();
+        $equipments = Equipment::orderBy('name')->get();
 
-        return view('ingredients.create', [
-            'ingredients' => $ingredients,
+        return view('equipments.create', [
+            'equipments' => $equipments,
         ]); 
 
     }
@@ -41,20 +40,20 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        $ingredient = new Ingredient;
+        $equipment = new Equipment;
 
-        if(!$ingredient)
+        if(!$equipment)
         {
-            return back()->with(['error', 'Ingredient cannot be initialized']);
+            return back()->with(['error', 'Equipment cannot be initialized']);
         } 
         else
         {
-            $ingredient->name = $request->get('name');
+            $equipment->name = $request->get('name');
 
-            $ingredient->save();
+            $equipment->save();
 
-            return back()->with(['success' => 'Ingredient was added']);  
-        }        
+            return back()->with(['success' => 'Equipment was added']);  
+        }
     }
 
     /**
@@ -76,12 +75,11 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        $ingredient = Ingredient::find($id);
+        $equipment = Equipment::find($id);
 
-        return view('ingredients.edit', [
-            'ingredient' => $ingredient,
+        return view('equipments.edit', [
+            'equipment' => $equipment,
         ]);
-       
     }
 
     /**
@@ -93,26 +91,25 @@ class IngredientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $equipment = Equipment::find($id);
 
-        $ingredient = Ingredient::find($id);
-
-        if(!$ingredient)
+        if(!$equipment)
         {
-            return back()->with(['error', 'Ingredient not found']);
+            return back()->with(['error', 'Equipment not found']);
         } 
         else
         {  
-            $ingredient->name = $request->get('name');
+            $equipment->name = $request->get('name');
 
-            $ingredient->update();
+            $equipment->update();
 
-            if($ingredient)
+            if($equipment)
             {
-                return redirect('/ingredients')->with(['success' => 'Ingredient was updated']);
+                return redirect('/equipments')->with(['success' => 'Equipment was updated']);
             } 
             else
             {
-                return back()->with(['error' => 'Ingredient was not updated']);
+                return back()->with(['error' => 'Equipment was not updated']);
             }
         }
     }
@@ -125,20 +122,20 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        $ingredient = Ingredient::find($id);
+        $equipment = Equipment::find($id);
 
-        if(!$ingredient)
+        if(!$equipment)
         {
-            return back()->with(['error' => 'Ingredient not found']);
+            return back()->with(['error' => 'Equipment not found']);
         } 
-        elseif($ingredient)
+        elseif($equipment)
         {
-            $ingredient->delete();
-            return back()->with(['success' => 'Ingredient was deleted']);
+            $equipment->delete();
+            return back()->with(['success' => 'Equipment was deleted']);
         } 
         else
         {
-            return back()->with(['error' => 'Ingredient was not deleted']);
+            return back()->with(['error' => 'Equipment was not deleted']);
         }
     }
 }

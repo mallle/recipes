@@ -18,6 +18,13 @@
 			  		<li>
 			  			Personen: @{{ rezept.persons}}
 			  		</li>
+			  		<li>
+			  			@{{ rezept.ingredient_id}}
+			  		</li>
+
+			  		<li v-for="tag in rezept.tags">
+			  			@{{ tag.name }}
+			  		</li>
 			  		
 			  	</ul>
 			    

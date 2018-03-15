@@ -53,13 +53,19 @@ class RecipeController extends Controller
 
         $recipe->name = $request->get('name');
         $recipe->persons = $request->get('persons');
-        $recipe->description = $request->get('description');
-        $recipe->time = $request->get('time');
+        $recipe->preparationtime = $request->get('preparationtime');
+        $recipe->resttime = $request->get('resttime');
+        $recipe->bakingtime = $request->get('bakingtime');
+        $recipe->effort = $request->get('effort');
+        
+        $image = $request->file('image');
+        $filename = str_replace(' ', '', strtolower($recipe->name) . '.jpg');  
+        $image->move($recipe->getRecipePath(), $filename);
+        $recipe->image = $filename;
 
         $recipe->save();
 
         return redirect('recipes');
-        
     }
 
     /**
@@ -116,9 +122,19 @@ class RecipeController extends Controller
         {  
             $recipe->name = $request->get('name');
             $recipe->persons = $request->get('persons');
-            $recipe->description = $request->get('description');
-            $recipe->time = $request->get('time');
-
+            $recipe->preparationtime = $request->get('preparationtime');
+            $recipe->resttime = $request->get('resttime');
+            $recipe->bakingtime = $request->get('bakingtime');
+            $recipe->effort = $request->get('effort');
+            
+            if($request->has('image'))
+            {
+                $image = $request->file('image');
+                $filename = str_replace(' ', '', strtolower($recipe->name) . '.jpg');  
+                $image->move($recipe->getRecipePath(), $filename);
+                $recipe->image = $filename;
+            }
+            
             $recipe->update();
 
             if($recipe)
@@ -143,6 +159,7 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
+        
 
         if(!$recipe)
         {

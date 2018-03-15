@@ -43,16 +43,17 @@
                     <ul class="nav navbar-nav">
                         @auth 
                           <li class="{{ Request::is('recipes*') ? 'active' : '' }}">
-                            <a href="{{ route('recipes')}}" >Recipes</a>
+                            <a href="{{ route('recipes')}}">Rezepte</a>
                         </li> 
-
-                         <li class="{{ Request::is('ingredients*') ?  'active' : '' }}">
-                            <a href="{{ route('ingredient.create')}}">Ingredients</a>
+                        <li class="{{ Request::is('ingredients*') ?  'active' : '' }}">
+                            <a href="{{ route('ingredient.create')}}">Zutaten</a>
                         </li>
-                        
                         <li class="{{ Request::is('tags*') ?  'active' : '' }}">
-                            <a href="{{ route('tag.create')}}" >Tags</a>
-                       </li>
+                            <a href="{{ route('tag.create')}}">Tags</a>
+                        </li>
+                        <li class="{{ Request::is('equipments*') ?  'active' : '' }}">
+                            <a href="{{ route('equipments.create')}}">Untensilien</a>
+                        </li>
                         @endauth
                     </ul>
 

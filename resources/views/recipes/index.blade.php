@@ -14,10 +14,15 @@
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				<div class="caption">
+					{{-- {{dd($recipe->getImage())}} --}}
+					<img src="{{$recipe->getImage()}}" style="max-width:330px">
 					<h3>{{ $recipe->name}}</h3>
-					<p><i class="fas fa-clock"></i> {{ $recipe->time}}</p>
+					<p><i class="fas fa-clock"></i> {{ $recipe->totalPreparationtime()}} Insgesamt</p>
+					<p><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
+					<p><i class="fas fa-clock"></i> {{ $recipe->resttime}} Ruhezeit</p>
+					<p><i class="fas fa-clock"></i> {{ $recipe->bakingtime}} Backzeit</p>
 					@foreach($recipe->tags as $tag)
-							<p><i class="fas fa-tag"></i> {{ $tag->name}} </p>
+						<p><i class="fas fa-tag"></i> {{ $tag->name}} </p>
 					@endforeach
 					<p><a href="/recipes/{{$recipe->id}}" class="btn btn-primary" role="button">Make me!</a></p>
 				</div>
