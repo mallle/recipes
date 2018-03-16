@@ -3,6 +3,52 @@
 @section('content')
 		<section class="section" id="app">
 			<div class="container">
+				<div class="columns is-desktop">
+					<div class="column"  v-for="recipe in recipes">
+						<article class="column notification is-link">
+							<div class="card">
+								<div class="card-image">
+									<figure class="image is-4by3">
+										<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+									</figure>
+								</div>
+								<div class="card-content">
+									<div class="media">
+
+										<div class="media-content">
+											<p class="title is-4">@{{ recipe.name }}</p>
+										</div>
+									</div>
+
+									<div class="content">
+
+										<a href="#">#css</a> <a href="#">#responsive</a>
+										<br>
+										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			  <h1 class="title" v-for="recipe in recipes">
 			  	<ul>
 			  		<li>

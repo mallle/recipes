@@ -202,6 +202,14 @@
 		                  	<label for="description">Anleitungsschritt</label>
 		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
 		                </div>
+						<div class="form-group">
+							<select name="ingredient_id">
+								<option selected disabled>Wähle Ingredients</option>
+								@foreach($recipe->ingredients as $ingredient)
+									<option value="{{$ingredient->id}}">{{$ingredient->name}}</option>
+								@endforeach
+							</select>
+						</div>
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
 	                </form>
 		        </div>
