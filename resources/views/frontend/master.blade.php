@@ -42,11 +42,11 @@
 		<!-- Hero content: will be in the middle -->
 		<div class="hero-body">
 			<div class="container has-text-centered">
-				<h1 class="title">
-					Deine Rezepte
+				<h1 class="title ">
+					Meine Rezepte
 				</h1>
 				<h2 class="subtitle">
-					Subtitle
+					-a little taste of heaven every day
 				</h2>
 			</div>
 		</div>
@@ -64,8 +64,7 @@
 		</div>
 	</section>
 
-     @yield('content')
-
+	@yield('content')
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}

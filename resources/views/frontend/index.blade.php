@@ -1,55 +1,44 @@
 @extends('frontend.master')
 
 @section('content')
-		<section class="section" id="app">
-			<div class="container">
-				<div class="columns is-desktop">
-					<div class="column"  v-for="recipe in recipes">
-						<article class="column notification is-link">
-							<div class="card">
-								<div class="card-image">
-									<figure class="image is-4by3">
-										<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-									</figure>
+
+	<section class="section" id="app">
+		<div class="container">
+			<div class="columns notification is-light is-variable is-multiline">
+				<div class="column is-4" v-for="recipe in recipes">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image is-4by3">
+								<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-left">
 								</div>
-								<div class="card-content">
-									<div class="media">
-
-										<div class="media-content">
-											<p class="title is-4">@{{ recipe.name }}</p>
+								<div class="media-content">
+									<p class="title is-4">@{{ recipe.name }}</p>
+									<div class="columns">
+										<div class="column">
+											<i class="fas fa-users"></i> @{{ recipe.persons }}
 										</div>
-									</div>
-
-									<div class="content">
-
-										<a href="#">#css</a> <a href="#">#responsive</a>
-										<br>
-										<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+										<div class="column">
+											<i class="fas fa-stopwatch"></i> @{{ recipe.preparationtime }} Minuten
+										</div>
 									</div>
 								</div>
 							</div>
-						</article>
+
+						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</section>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			  <h1 class="title" v-for="recipe in recipes">
+			  {{--<h1 class="title" v-for="recipe in recipes">
 			  	<ul>
 			  		<li>
 			  			Rezept: @{{ recipe.name}}
@@ -72,12 +61,9 @@
 			  		
 			  	</ul>
 			    
-			  </h1>
-			  <p class="subtitle">
-			    
-			  </p>
-			</div>
-		</section>
+			  </h1>--}}
+
+
 
 		<script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
