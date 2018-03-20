@@ -37,7 +37,7 @@
 							<p><i class="fas fa-clock"></i> {{ $recipe->totalPreparationtime()}} Insgesamt</p>
 						</li>
 						<li>
-							<p><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
+							<p class="recipe"><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
 						</li>
 						<li>
 							<p><i class="fas fa-clock"></i> {{ $recipe->resttime}} Ruhezeit</p>
