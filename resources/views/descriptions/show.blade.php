@@ -66,7 +66,7 @@
 									@endif
 							</td>
 							<td>
-								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}/detach_ingredients/{{$ingredient->id}}" role="form" novalidate>	
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
 										{{ csrf_field() }}
 										{{ method_field('DELETE') }}
 										<button type="submit" class="btn"><i class="fas fa-trash-alt"></i></button>

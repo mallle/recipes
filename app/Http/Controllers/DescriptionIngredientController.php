@@ -14,9 +14,9 @@ class DescriptionIngredientController extends Controller
 
         $description->ingredients()->detach($ingredient_id);
 
-        if ($recipe)
+        if ($description)
         {
-            return back()->with(['message' => 'Detach was successful']);
+            return redirect('descriptions/' . $description_id)->with(['success' => 'Detach was successful']);
         }
         else
         {
