@@ -12,7 +12,7 @@ class DescriptionIngredientController extends Controller
 
         $description = Description::find($description_id);
 
-        $recipe->equipments()->detach($equipment_id);
+        $description->ingredients()->detach($ingredient_id);
 
         if ($recipe)
         {
@@ -29,21 +29,18 @@ class DescriptionIngredientController extends Controller
     {
         $description = Description::find($description_id);
 
-        $equipment_id = $request->get("equipment_id");
+        $ingredient_id_type = explode(',', $request->get("ingredient_id"));
 
-        if (! $recipe->equipments()->syncWithoutDetaching([$equipment_id]))
-        {
-            $recipe->equipments()->attach($equipment_id);
-        }
+        $ingredient_id = $ingredient_id_type[0];
 
-        if ($recipe)
-        {
-            return redirect('recipes/' . $recipe_id)->with(['message' => 'Attach was successful']);
-        }
-        else
-        {
-            return back()->with(['message' => 'Error not atached!']);
-        }
+            $array = [
+                'amount' => $request->get("amount"),
+                'type' => $ingredient_id_type[1]
+            ];
+      
+            $description->ingredients()->attach($ingredient_id, $array);
+
+            return redirect('descriptions/' . $description_id)->with(['success' => 'Attach was successful']);
 
     }
 }

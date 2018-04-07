@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron" style="background-image:url({{$recipe->getImage()}});height:400px">
+	<div class="jumbotron" style="background-image:url({{$recipe->getImage()}});">
 	  	<h1 class="text-center">{{$recipe->name}}</h1>
 	</div>
 
@@ -72,6 +72,8 @@
 									Milliliter
 									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_PACKUNG)
 									Packung
+									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_SCHEIBE)
+									Scheibe
 									@endif
 							</td>
 							<td>
@@ -88,13 +90,13 @@
 					<h4>Anleitung</h4>
 					@foreach($descriptions as $description)
 						<ul class="list-inline">
-							<li>{{$description->descriptionnumber}}. {{ $description->description }}
+							<li><a href="/descriptions/{{$description->id}}">{{$description->descriptionnumber}}. {{ $description->description }}</a>
 							</li>
 							<li>
 								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
 							</li>
 							<li>
-								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}/" role="form" novalidate>	
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>	
 										{{ csrf_field() }}
 										{{ method_field('DELETE') }}
 									<button class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -180,6 +182,7 @@
 								<option>Deciliter</option>
 								<option>Milliliter</option>
 								<option>Packung</option>
+								<option>Scheibe</option>
 							</select>
 						</div>
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
@@ -202,14 +205,6 @@
 		                  	<label for="description">Anleitungsschritt</label>
 		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
 		                </div>
-						<div class="form-group">
-							<select name="ingredient_id">
-								<option selected disabled>Wähle Ingredients</option>
-								@foreach($recipe->ingredients as $ingredient)
-									<option value="{{$ingredient->id}}">{{$ingredient->name}}</option>
-								@endforeach
-							</select>
-						</div>
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
 	                </form>
 		        </div>

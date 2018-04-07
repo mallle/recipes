@@ -47,7 +47,6 @@ class DescriptionController extends Controller
             $description->description = $request->get('description');
             $description->descriptionnumber = $request->get('descriptionnumber');
             $description->recipe_id = $recipe_id;
-
             $description->save();
 
             return back()->with(['success' => 'Description was added']);  
@@ -62,7 +61,13 @@ class DescriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $description = Description::find($id);
+        $recipe = $description->recipe;
+
+        return view('descriptions.show', [
+            'description' => $description,
+            'recipe' => $recipe
+        ]);
     }
 
     /**
@@ -76,7 +81,7 @@ class DescriptionController extends Controller
         $description = Description::find($id);
 
         return view('descriptions.edit', [
-            'description' => $description,
+            'description' => $description
         ]);
     }
 
