@@ -7,7 +7,7 @@ use App\Description;
 
 class DescriptionEquipmentController extends Controller
 {
-    public function detach($description_id, $ingredient_id)
+    public function detach($description_id, $equipment_id)
     {
 
         $description = Description::find($description_id);
@@ -16,7 +16,7 @@ class DescriptionEquipmentController extends Controller
 
         if ($description)
         {
-            return back()->with(['message' => 'Detach was successful']);
+            return redirect('descriptions/' . $description_id)->with(['success' => 'Detach was successful']);
         }
         else
         {
@@ -28,7 +28,7 @@ class DescriptionEquipmentController extends Controller
     public function attach(\Illuminate\Http\Request $request, $description_id)
     {
         $description = Description::find($description_id);
-
+        
         $equipment_id = $request->get("equipment_id");
 
         if (! $description->equipments()->syncWithoutDetaching([$equipment_id]))
@@ -38,7 +38,7 @@ class DescriptionEquipmentController extends Controller
 
         if ($description)
         {
-            return back()->with(['message' => 'Attach was successful']);
+            return redirect('descriptions/' . $description_id)->with(['success' => 'Attach was successful']);
         }
         else
         {

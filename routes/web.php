@@ -77,4 +77,8 @@ Route::group(['middleware'=>'auth'], function(){
 	//DescriptionsIngredients
 	Route::post('/descriptions/{recipe_id}/attach_ingredient', 'DescriptionIngredientController@attach');
 	Route::delete('/descriptions/{recipe_id}/detach_ingredient/{ingredient_id}', 'DescriptionIngredientController@detach');
+
+	//DescriptionsEquipment
+	Route::post('/descriptions/{recipe_id}/attach_equipment', 'DescriptionEquipmentController@attach');
+	Route::delete('/descriptions/{recipe_id}/detach_equipment/{equipment_id}', 'DescriptionEquipmentController@detach');
 });

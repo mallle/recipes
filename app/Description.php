@@ -21,7 +21,7 @@ class Description extends Model
 
     public function equipments()
     {
-    	return $this -> belongsToMany('\App\Ingredient', 'description_equipment', 'description_id', 'equipment_id');
+    	return $this -> belongsToMany('\App\Equipment', 'description_equipment', 'description_id', 'equipment_id');
     }
     
 }
