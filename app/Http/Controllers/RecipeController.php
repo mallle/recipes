@@ -9,9 +9,12 @@ use App\Recipe;
 use App\RecipeIngredients;
 use App\Description;
 use App\Equipment;
+use App\Validation\ValidateRecipeRequest;
 
 class RecipeController extends Controller
 {
+
+    use Validation\ValidateRecipeRequest;
     /**
      * Display a listing of the resource.
      *
@@ -49,6 +52,9 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $this->validateRequest($request);
+
         $recipe = new Recipe;
 
         $recipe->name = $request->get('name');
@@ -115,6 +121,9 @@ class RecipeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $this->validateRequest($request);
+
         $recipe = Recipe::find($id);
 
         if(!$recipe)

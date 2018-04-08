@@ -41,6 +41,8 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateRequest($request);
+
         $ingredient = new Ingredient;
 
         if(!$ingredient)
@@ -94,6 +96,8 @@ class IngredientController extends Controller
     public function update(Request $request, $id)
     {
 
+        $this->validateRequest($request);
+        
         $ingredient = Ingredient::find($id);
 
         if(!$ingredient)

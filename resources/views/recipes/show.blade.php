@@ -87,24 +87,6 @@
 						@endforeach
 					</table>
 					<hr>
-					<h4>Anleitung</h4>
-					@foreach($descriptions as $description)
-						<ul class="list-inline">
-							<li><a href="/descriptions/{{$description->id}}">{{$description->descriptionnumber}}. {{ $description->description }}</a>
-							</li>
-							<li>
-								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
-							</li>
-							<li>
-								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>	
-										{{ csrf_field() }}
-										{{ method_field('DELETE') }}
-									<button class="btn"><i class="fas fa-trash-alt"></i></button>
-								</form>
-							</li>
-						</ul>
-					@endforeach
-					<hr>
 					<h4>Utensilien</h4>
 					<table class="table">
 						@foreach($recipe->equipments as $equipment)
@@ -126,6 +108,24 @@
 						</tr>
 						@endforeach
 					</table>
+					<hr>
+					<h4>Anleitung</h4>
+					@foreach($descriptions as $description)
+						<ul class="list-inline">
+							<li><a href="/descriptions/{{$description->id}}">{{$description->descriptionnumber}}. {{ $description->description }}</a>
+							</li>
+							<li>
+								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
+							</li>
+							<li>
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>	
+										{{ csrf_field() }}
+										{{ method_field('DELETE') }}
+									<button class="btn"><i class="fas fa-trash-alt"></i></button>
+								</form>
+							</li>
+						</ul>
+					@endforeach
 					<hr>
 					<h4>Tags</h4>
 					<table class="table">
@@ -191,26 +191,6 @@
 			</div>
 			<div class="panel panel-primary">
 				  <div class="panel-heading">
-				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
-				  </div>
-				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
-                            {{ csrf_field() }}
-                            {{ method_field('POST') }}
-                        <div class="form-group">
-		                  	<label for="descriptionnumber">Anleitungs schrit nummer: </label>
-		                  	<input type="text" class="form-control" id="descriptionnumber" name="descriptionnumber" placeholder="1, 2, 3...">
-		                </div>
-						<div class="form-group">
-		                  	<label for="description">Anleitungsschritt</label>
-		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
-		                </div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
-	                </form>
-		        </div>
-			</div>
-			<div class="panel panel-primary">
-				  <div class="panel-heading">
 				    <h3 class="panel-title">Utensilien hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
@@ -228,6 +208,26 @@
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
 	                </form>
 				</div>
+			</div>
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
+				  </div>
+				<div class="panel-body">
+					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
+                            {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                        <div class="form-group">
+		                  	<label for="descriptionnumber">Anleitungs schrit nummer: </label>
+		                  	<input type="text" class="form-control" id="descriptionnumber" name="descriptionnumber" placeholder="1, 2, 3...">
+		                </div>
+						<div class="form-group">
+		                  	<label for="description">Anleitungsschritt</label>
+		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
+		                </div>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                </form>
+		        </div>
 			</div>
 			<div class="panel panel-primary">
 				  <div class="panel-heading">
