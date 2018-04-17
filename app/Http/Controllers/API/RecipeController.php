@@ -33,8 +33,8 @@ class RecipeController extends Controller
                     'descriptionnumber' => $description->descriptionnumber,
                     'description' => $description->description,
                   ];
-            } 
-
+            }
+            
         	$data[] = [
         		'id' => $recipe->id,
         		'name' => $recipe->name,
@@ -43,7 +43,7 @@ class RecipeController extends Controller
                 'resttime' => $recipe->resttime,
                 'bakingtime' => $recipe->bakingtime,
                 'effort' => $recipe->effort,
-                'image' => $recipe->image,
+                'image' => url('/storage/recipes/' . $recipe->image),
                 'descriptions' => $descriptions,
                 'ingredients' => $ingredients,
                 'tags' => $recipe->tags

@@ -17,6 +17,20 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+// const app = new Vue({
+//     el: '#app'
+// });
+
+import Recipe from './components/Recipe.vue';
+
 const app = new Vue({
-    el: '#app'
-});
+    el: '#app',
+
+    components: { Recipe },
+    data: {
+        recipes: []
+    },
+    mounted() {
+        axios.get('/api/recipes').then(response => this.recipes = response.data);
+    }
+})
