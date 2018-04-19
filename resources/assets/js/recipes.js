@@ -6,31 +6,27 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue'
 
-window.Vue = require('vue');
+window.Vue = Vue;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+import router from './router'
+import VueRouter from 'vue-router'
 
-import Recipe from './components/Recipe.vue';
+Vue.use(VueRouter)
+
+import App from './components/App'
 
 const app = new Vue({
     el: '#app',
+    components: {App, router},
+    template: `<App />`
 
-    components: { Recipe },
-    data: {
-        recipes: []
-    },
-    mounted() {
-        axios.get('/api/recipes').then(response => this.recipes = response.data);
-    }
 })

@@ -67,8 +67,9 @@
 	@yield('content')
 
     <!-- Scripts -->
-     <script src="{{ asset('js/app.js') }}"></script>
-</body>
+	<script src="{{ mix('js/recipes.js') }}"></script>
+
+	</body>
 </html>
 
 
