@@ -48,7 +48,6 @@
 					</ul>
 					<h4>Zutaten</h4>
 					<table class="table">
-						
 						@foreach($recipe->ingredients as $ingredient)
 						<tr>
 							<td>
@@ -56,25 +55,7 @@
 							</td>
 							<td>
 								{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}} 
-								@if($ingredient->pivot->type === App\RecipeIngredients::TYPE_GRAMM)
-									Gramm
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_STÜCK)
-									Stück
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_TEELÖFFEL)
-									Teelöffel
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_ESSLÖFFEL)
-									Esslöffel
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_LITER)
-									Liter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_DECILITER)
-									Deciliter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_MILLILITER)
-									Milliliter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_PACKUNG)
-									Packung
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_SCHEIBE)
-									Scheibe
-									@endif
+								@include('layouts.ingredient-type')
 							</td>
 							<td>
 								<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
@@ -124,6 +105,18 @@
 									<button class="btn"><i class="fas fa-trash-alt"></i></button>
 								</form>
 							</li>
+							@foreach($description->ingredients as $ingredient)
+							<ul>
+								<li>{{ $ingredient->name }} {{ $ingredient->pivot->amount}} @include('layouts.ingredient-type')
+
+								</li>
+							</ul>
+							@endforeach
+							@foreach($description->equipments as $equipment)
+							<ul>
+								<li>{{ $equipment->name }}</li>
+							</ul>
+							@endforeach
 						</ul>
 					@endforeach
 					<hr>

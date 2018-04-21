@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron">
-	  	<h1 class="text-center">Schritt nummer {{$description->descriptionnumber}}. : {{$description->description}}</h1>
+	<div class="">
+	  	<h1 class="text-center">{{$description->descriptionnumber}}. Schritt: {{$description->description}}</h1>
 	</div>
 	@include('layouts.session')
 	@include('layouts.error')
@@ -21,7 +21,8 @@
 						<select name="ingredient_id">
 							<option selected disabled>Wähle Ingredients</option>
 							@foreach($recipe->ingredients as $ingredient)
-								<option value="{{$ingredient->id}},{{$ingredient->pivot->type}}">{{$ingredient->name}}</option>
+								<option value="{{$ingredient->id}},{{$ingredient->pivot->type}}">{{$ingredient->name}} max {{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $description->recipe->id)}} @include('layouts.ingredient-type')
+								</option>
 							@endforeach
 						</select>
 					</div>
