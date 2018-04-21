@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron">
+	<div class="">
 	  	<h1 class="text-center">Deine Rezepte</h1>
 	  	<div class="text-right">
 	  		<a href="recipes/create"><i class="fas fa-plus-square fa-2x"></i></a>

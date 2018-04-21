@@ -7,6 +7,7 @@ use App\Tag;
 
 class TagController extends Controller
 {
+    use Validation\ValidateTagRequest;
 
     /**
      * Display a listing of the resource.
@@ -40,6 +41,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validateRequest($request);
 
         $request->validate([
             'name' => 'unique:tags,name|required',
@@ -120,6 +123,8 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateRequest($request);
+        
         $tag = Tag::find($id);
 
         if(!$tag)

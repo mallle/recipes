@@ -8,6 +8,7 @@ use App\Description;
 
 class DescriptionController extends Controller
 {
+    use Validation\ValidateDescriptionRequest;
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +37,8 @@ class DescriptionController extends Controller
      */
     public function store(Request $request, $recipe_id)
     {
+        $this->validateRequest($request);
+
         $description = new Description;
 
         if(!$description)
@@ -45,9 +48,9 @@ class DescriptionController extends Controller
         else
         {
             $description->description = $request->get('description');
-            $description->descriptionnumber = $request->get('descriptionnumber');
+            $descriptionnumber = rtrim($request->get('descriptionnumber'), '.');
+            $description->descriptionnumber = $descriptionnumber;
             $description->recipe_id = $recipe_id;
-
             $description->save();
 
             return back()->with(['success' => 'Description was added']);  
@@ -62,7 +65,13 @@ class DescriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $description = Description::find($id);
+        $recipe = $description->recipe;
+
+        return view('descriptions.show', [
+            'description' => $description,
+            'recipe' => $recipe
+        ]);
     }
 
     /**
@@ -76,7 +85,7 @@ class DescriptionController extends Controller
         $description = Description::find($id);
 
         return view('descriptions.edit', [
-            'description' => $description,
+            'description' => $description
         ]);
     }
 
@@ -89,6 +98,8 @@ class DescriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateRequest($request);
+        
         $description = Description::find($id);
 
         if(!$description)

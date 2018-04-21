@@ -93,6 +93,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('recrecipes.jss') }}"></script>
 </body>
 </html>

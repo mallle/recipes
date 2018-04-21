@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron" style="background-image:url({{$recipe->getImage()}});height:400px">
+	<div class="jumbotron" style="background-image:url({{$recipe->getImage()}});">
 	  	<h1 class="text-center">{{$recipe->name}}</h1>
 	</div>
 
@@ -37,7 +37,7 @@
 							<p><i class="fas fa-clock"></i> {{ $recipe->totalPreparationtime()}} Insgesamt</p>
 						</li>
 						<li>
-							<p><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
+							<p class="recipe"><i class="fas fa-clock"></i> {{ $recipe->preparationtime}} Zubereitung</p>
 						</li>
 						<li>
 							<p><i class="fas fa-clock"></i> {{ $recipe->resttime}} Ruhezeit</p>
@@ -48,7 +48,6 @@
 					</ul>
 					<h4>Zutaten</h4>
 					<table class="table">
-						
 						@foreach($recipe->ingredients as $ingredient)
 						<tr>
 							<td>
@@ -56,23 +55,7 @@
 							</td>
 							<td>
 								{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}} 
-								@if($ingredient->pivot->type === App\RecipeIngredients::TYPE_GRAMM)
-									Gramm
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_STÜCK)
-									Stück
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_TEELÖFFEL)
-									Teelöffel
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_ESSLÖFFEL)
-									Esslöffel
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_LITER)
-									Liter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_DECILITER)
-									Deciliter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_MILLILITER)
-									Milliliter
-									@elseif($ingredient->pivot->type === App\RecipeIngredients::TYPE_PACKUNG)
-									Packung
-									@endif
+								@include('layouts.ingredient-type')
 							</td>
 							<td>
 								<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
@@ -84,24 +67,6 @@
 						</tr>
 						@endforeach
 					</table>
-					<hr>
-					<h4>Anleitung</h4>
-					@foreach($descriptions as $description)
-						<ul class="list-inline">
-							<li>{{$description->descriptionnumber}}. {{ $description->description }}
-							</li>
-							<li>
-								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
-							</li>
-							<li>
-								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}/" role="form" novalidate>	
-										{{ csrf_field() }}
-										{{ method_field('DELETE') }}
-									<button class="btn"><i class="fas fa-trash-alt"></i></button>
-								</form>
-							</li>
-						</ul>
-					@endforeach
 					<hr>
 					<h4>Utensilien</h4>
 					<table class="table">
@@ -124,6 +89,36 @@
 						</tr>
 						@endforeach
 					</table>
+					<hr>
+					<h4>Anleitung</h4>
+					@foreach($descriptions as $description)
+						<ul class="list-inline">
+							<li><a href="/descriptions/{{$description->id}}">{{$description->descriptionnumber}}. {{ $description->description }}</a>
+							</li>
+							<li>
+								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
+							</li>
+							<li>
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>	
+										{{ csrf_field() }}
+										{{ method_field('DELETE') }}
+									<button class="btn"><i class="fas fa-trash-alt"></i></button>
+								</form>
+							</li>
+							@foreach($description->ingredients as $ingredient)
+							<ul>
+								<li>{{ $ingredient->name }} {{ $ingredient->pivot->amount}} @include('layouts.ingredient-type')
+
+								</li>
+							</ul>
+							@endforeach
+							@foreach($description->equipments as $equipment)
+							<ul>
+								<li>{{ $equipment->name }}</li>
+							</ul>
+							@endforeach
+						</ul>
+					@endforeach
 					<hr>
 					<h4>Tags</h4>
 					<table class="table">
@@ -180,28 +175,9 @@
 								<option>Deciliter</option>
 								<option>Milliliter</option>
 								<option>Packung</option>
+								<option>Scheibe</option>
 							</select>
 						</div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
-	                </form>
-		        </div>
-			</div>
-			<div class="panel panel-primary">
-				  <div class="panel-heading">
-				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
-				  </div>
-				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
-                            {{ csrf_field() }}
-                            {{ method_field('POST') }}
-                        <div class="form-group">
-		                  	<label for="descriptionnumber">Anleitungs schrit nummer: </label>
-		                  	<input type="text" class="form-control" id="descriptionnumber" name="descriptionnumber" placeholder="1, 2, 3...">
-		                </div>
-						<div class="form-group">
-		                  	<label for="description">Anleitungsschritt</label>
-		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
-		                </div>
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
 	                </form>
 		        </div>
@@ -225,6 +201,26 @@
 	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
 	                </form>
 				</div>
+			</div>
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
+				  </div>
+				<div class="panel-body">
+					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
+                            {{ csrf_field() }}
+                            {{ method_field('POST') }}
+                        <div class="form-group">
+		                  	<label for="descriptionnumber">Anleitungs schrit nummer: </label>
+		                  	<input type="text" class="form-control" id="descriptionnumber" name="descriptionnumber" placeholder="1, 2, 3...">
+		                </div>
+						<div class="form-group">
+		                  	<label for="description">Anleitungsschritt</label>
+		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
+		                </div>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                </form>
+		        </div>
 			</div>
 			<div class="panel panel-primary">
 				  <div class="panel-heading">
