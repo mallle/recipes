@@ -15,7 +15,7 @@
                                 <div class="media-left">
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">{{ recipe.name }}</p>
+                                    <router-link :to="'/recipe/:recipe.id'"><p class="title is-4">{{ recipe.name }}</p></router-link>
                                     <div class="columns">
                                         <div class="column">
                                             <i class="fas fa-users"></i> {{ recipe.persons }}
@@ -37,6 +37,7 @@
 <script>
     export default {
         name: "Recipes",
+
 
         data() {
             return {

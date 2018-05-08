@@ -15,10 +15,9 @@ let routes = [
         path: '/contact',
         component: require('./views/Contact')
     },
-
     {
-        path: '/exp',
-        component: require('./views/Exp')
+        path: '/recipe/:id',
+        component: require('./views/Recipe')
     }
 ];
 

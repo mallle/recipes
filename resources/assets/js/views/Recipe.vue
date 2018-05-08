@@ -6,6 +6,8 @@
 
 <script>
 export default {
+    name: "recipe",
+    
     data() {
         return {
             recipes: ''
