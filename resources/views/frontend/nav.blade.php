@@ -5,12 +5,12 @@
                 <a>Home</a>
             </router-link>
 
-            <router-link tag="li" to="/about">
-                <a>About</a>
+            <router-link tag="li" to="/search">
+                <a>Suche</a>
             </router-link>
 
-            <router-link tag="li" to="/contact">
-                <a>Contact</a>
+            <router-link tag="li" to="/tags">
+                <a>Tags</a>
             </router-link>
         </ul>
     </div>

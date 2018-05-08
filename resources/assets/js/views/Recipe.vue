@@ -10,11 +10,11 @@ export default {
     
     data() {
         return {
-            recipes: ''
+            recipe: ''
         }
     },
     created() {
-        axios.get('/api/recipes').then(response => this.recipes = response.data);
+        axios.get('/api/recipes').then(response => this.recipe = response.data);
     }
 
 

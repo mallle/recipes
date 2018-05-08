@@ -15,7 +15,7 @@
                                 <div class="media-left">
                                 </div>
                                 <div class="media-content">
-                                    <router-link :to="'/recipe/:recipe.id'"><p class="title is-4">{{ recipe.name }}</p></router-link>
+                                    <router-link :to="{ name: 'recipe', params: { id: recipe.id }}"><p class="title is-4">{{ recipe.name }}</p></router-link>
                                     <div class="columns">
                                         <div class="column">
                                             <i class="fas fa-users"></i> {{ recipe.persons }}

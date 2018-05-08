@@ -5,18 +5,18 @@ let routes = [
         path: '/',
         component: require('./views/Recipes.vue')
     },
-
     {
-        path: '/about',
-        component: require('./views/About')
+        path: '/search',
+        component: require('./views/Search.vue')
     },
 
     {
-        path: '/contact',
-        component: require('./views/Contact')
+        path: '/tags',
+        component: require('./views/Tags.vue')
     },
     {
         path: '/recipe/:id',
+        name: 'recipe',
         component: require('./views/Recipe')
     }
 ];
