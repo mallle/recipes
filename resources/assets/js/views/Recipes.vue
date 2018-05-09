@@ -38,7 +38,6 @@
     export default {
         name: "Recipes",
 
-
         data() {
             return {
                 recipes: ''
