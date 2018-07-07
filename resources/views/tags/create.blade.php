@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron">
+	<div class="">
 	  	<h1 class="text-center">Tags für deine Rezepte</h1>
 	</div>
 	@include('layouts.session')
