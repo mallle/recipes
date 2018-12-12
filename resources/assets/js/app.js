@@ -24,6 +24,7 @@
 
 window.axios = require('axios');
 import Vue from 'vue'
+import App from "./App.vue";
 import VueRouter from 'vue-router';
 
 
@@ -42,3 +43,8 @@ new Vue({
     el: '#app',
     router,
 });
+
+new Vue({
+    router,
+    render: h => h(App)
+}).$mount("#app");

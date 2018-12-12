@@ -1,11 +1,11 @@
-import Home from './components/Home'
+import Home from './components/Home.vue'
 import Example from './components/Example.vue';
-import Example2 from './components/ExampleComponent';
+import Recipes from './pages/Recipes';
 
 export const routes = [
 
-    { path: '/vue', component: Home, name: 'Home' },
+    { path: '/vue/grid', component: Home, name: 'Home' },
     { path: '/vue/example', component: Example, name: 'Example' },
-    { path: '/vue/example2', component: Example2, name: 'Example2' }
+    { path: '/vue/recipes', component: Recipes, name: 'Recipes' }
 
 ];

@@ -1,25 +1,78 @@
 <template>
-    <div>
-
-        <h1 class="class 1">{{ message}}</h1>
-        <router-link to="/vue/example"><a>url to example</a></router-link>
-        <router-link to="/vue/example2"><a>url to example2</a></router-link>
-
-
-    </div>
+    <section class="grid-test">
+        <div class="row">
+            <div class="col-1-of-2">
+                Col 1 of 2
+            </div>
+            <div class="col-1-of-2">
+                Col 1 of 2
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1-of-3">
+                Col 1 of 3
+            </div>
+            <div class="col-1-of-3">
+                Col 1 of 3
+            </div>
+            <div class="col-1-of-3">
+                Col 1 of 3
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1-of-3">
+                Col 1 of 3
+            </div>
+            <div class="col-2-of-3">
+                Col 2 of 3
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-2-of-4">
+                Col 2 of 4
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1-of-4">
+                Col 1 of 4
+            </div>
+            <div class="col-3-of-4">
+                Col 3 of 4
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                message: 'This is the home component!'
-            };
-        }
-    };
+
 </script>
 
-<style lang="scss">
-@import "../../sass/frontend/styles";
+<style lang="scss" scoped>
+
+    [class^="col-"] {
+
+        background-color: blue;
+    }
+
 
 </style>
