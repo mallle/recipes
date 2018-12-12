@@ -1,7 +1,9 @@
-@if(!empty($errors->first()))
+@if(!empty($errors->any()))
     <div class="row col-lg-12">
         <div class="alert alert-danger">
-            <span>{{ $errors->first() }}</span>
+        	@foreach ($errors->all() as $error)
+        		 <li>{{ $error }}</li>
+        	@endforeach
         </div>
     </div>
 @endif

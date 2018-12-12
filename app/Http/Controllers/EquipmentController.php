@@ -7,6 +7,8 @@ use App\Equipment;
 
 class EquipmentController extends Controller
 {
+    use Validation\ValidateEquipmentIngredientRequest;
+
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +42,8 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateRequest($request);
+
         $equipment = new Equipment;
 
         if(!$equipment)
@@ -91,6 +95,8 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateRequest($request);
+
         $equipment = Equipment::find($id);
 
         if(!$equipment)

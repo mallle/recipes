@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 //Route::get('/', 'FrontendController@index');
@@ -61,7 +57,8 @@ Route::group(['middleware'=>'auth'], function(){
 
 	//Descriptions
 	Route::post('/descriptions/store/{recipe_id}', 'DescriptionController@store');
-	Route::get('/descriptions/{equipment_id}/edit', 'DescriptionController@edit');
+	Route::get('/descriptions/{id}', 'DescriptionController@show');
+	Route::get('/descriptions/{id}/edit', 'DescriptionController@edit');
 	Route::patch('/descriptions/{id}', 'DescriptionController@update');
 	Route::delete('/descriptions/{id}', 'DescriptionController@destroy');
 
@@ -77,4 +74,14 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('/recipes/{recipe_id}/attach_equipment', 'EquipmentRecipeController@attach');
 	Route::delete('/recipes/{recipe_id}/detach_equipment/{equipment_id}', 'EquipmentRecipeController@detach');
 
+
+	//DescriptionsIngredients
+	Route::post('/descriptions/{recipe_id}/attach_ingredient', 'DescriptionIngredientController@attach');
+	Route::delete('/descriptions/{recipe_id}/detach_ingredient/{ingredient_id}', 'DescriptionIngredientController@detach');
+
+	//DescriptionsEquipment
+	Route::post('/descriptions/{recipe_id}/attach_equipment', 'DescriptionEquipmentController@attach');
+	Route::delete('/descriptions/{recipe_id}/detach_equipment/{equipment_id}', 'DescriptionEquipmentController@detach');
 });
+
+Route::get('/{any}', 'FrontendController@index')->where('any', '.*');

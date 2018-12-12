@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <div class="jumbotron">
+  <div class="">
       <h1 class="text-center">Erstelle ein neuen Rezept</h1>
   </div>
 		@include('layouts.session')
