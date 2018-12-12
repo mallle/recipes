@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="jumbotron">
+	<div class="">
 	  	<h1 class="text-center">Utensil editieren</h1>
 	</div>
 	<div class="row">

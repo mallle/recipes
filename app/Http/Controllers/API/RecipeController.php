@@ -8,7 +8,7 @@ use App\Recipe;
 
 class RecipeController extends Controller
 {
-    public function find()
+    public function index()
     {
         $data = [];
 
@@ -51,6 +51,48 @@ class RecipeController extends Controller
 
         }
         
+        return  $data;
+    }
+
+    public function show($id)
+    {
+        $data = [];
+
+        $recipe = Recipe::find($id);
+
+        // return $categories;
+
+        $ingredients = [];
+        foreach ($recipe->ingredients as $ingredient) {
+            $ingredients[] = [
+                'name' => $ingredient->name,
+                'amount' => $ingredient->pivot->amount,
+                'type' => $ingredient->pivot->type,
+            ];
+        }
+
+        $descriptions = [];
+        foreach ($recipe->descriptions()->orderBy('descriptionnumber')->get() as $description) {
+            $descriptions[] = [
+                'descriptionnumber' => $description->descriptionnumber,
+                'description' => $description->description,
+            ];
+        }
+
+        $data[] = [
+            'id' => $recipe->id,
+            'name' => $recipe->name,
+            'persons' => $recipe->persons,
+            'preparationtime' => $recipe->preparationtime,
+            'resttime' => $recipe->resttime,
+            'bakingtime' => $recipe->bakingtime,
+            'effort' => $recipe->effort,
+            'image' => url('/storage/recipes/' . $recipe->image),
+            'descriptions' => $descriptions,
+            'ingredients' => $ingredients,
+            'tags' => $recipe->tags
+        ];
+
         return  $data;
     }
 }

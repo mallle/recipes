@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/', 'FrontendController@index');
+//Route::get('/', 'FrontendController@index');
+
+Route::get('/vue/{vue_capture?}', function () {
+    return view('frontend.index');
+})->where('vue_capture', '[\/\w\.-]*');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -82,3 +83,5 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('/descriptions/{recipe_id}/attach_equipment', 'DescriptionEquipmentController@attach');
 	Route::delete('/descriptions/{recipe_id}/detach_equipment/{equipment_id}', 'DescriptionEquipmentController@detach');
 });
+
+Route::get('/{any}', 'FrontendController@index')->where('any', '.*');

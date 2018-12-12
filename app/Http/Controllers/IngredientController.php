@@ -7,6 +7,8 @@ use App\Ingredient;
 
 class IngredientController extends Controller
 {
+    use Validation\ValidateEquipmentIngredientRequest;
+
     /**
      * Display a listing of the resource.
      *

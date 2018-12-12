@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/recipes', 'API\RecipeController@find');
+Route::get('/recipes', 'API\RecipeController@index');
+Route::get('/recipes/{id}', 'API\RecipeController@show');

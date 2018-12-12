@@ -1,80 +1,20 @@
-@extends('frontend.master')
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Meine Rezepte</title>
 
-@section('content')
+		<style rel="stylesheet" href="/css/styles.css"></style>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	</head>
+	<body>
 
-	<section class="section" id="app">
-		<div class="container">
-			<div class="columns notification is-light is-variable is-multiline">
-				<div class="column is-4" v-for="recipe in recipes">
-					<div class="card">
-						<div class="card-image">
-							<figure class="image is-4by3">
-								<img :src="recipe.image" alt="Placeholder image">
-							</figure>
-						</div>
-						<div class="card-content">
-							<div class="media">
-								<div class="media-left">
-								</div>
-								<div class="media-content">
-									<p class="title is-4">@{{ recipe.name }}</p>
-									<div class="columns">
-										<div class="column">
-											<i class="fas fa-users"></i> @{{ recipe.persons }}
-										</div>
-										<div class="column">
-											<i class="fas fa-stopwatch"></i> @{{ recipe.preparationtime }} Minuten
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div id="app">
+			{{--<router-view></router-view>--}}
 		</div>
-	</section>
 
 
-
-			  {{--<h1 class="title" v-for="recipe in recipes">
-			  	<ul>
-			  		<li>
-			  			Rezept: @{{ recipe.name}}
-			  		</li>
-			  		<li>
-			  			Personen: @{{ recipe.persons}}
-			  		</li>
-			  		<li>
-			  			<img src=""> @{{ recipe.persons}}
-			  		</li>
-			  		<li v-for="description in recipe.descriptions">
-			  			@{{ description.descriptionnumber }}. @{{ description.description}}
-			  		</li>
-			  		<li v-for="ingredient in recipe.ingredients">
-			  			@{{ ingredient.name }} Amount:@{{ ingredient.amount}} @{{ingredient.type}}
-			  		</li>
-			  		<li v-for="tag in recipe.tags">
-			  			@{{ tag.name }}
-			  		</li>
-
-			  	</ul>
-
-			  </h1>--}}
-
-
-
-		<script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
-		<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-		<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
-
-	  	<script>
-
-//
-//
-//			export default {
-//
-//			}
-
-  		</script>
-@endsection
+		<script src="/js/app.js"></script>
+	</body>
+</html>

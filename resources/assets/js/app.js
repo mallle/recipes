@@ -5,9 +5,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,22 +16,35 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 // const app = new Vue({
 //     el: '#app'
 // });
 
-import Recipe from './components/Recipe.vue';
+window.axios = require('axios');
+import Vue from 'vue'
+import App from "./App.vue";
+import VueRouter from 'vue-router';
 
-const app = new Vue({
+
+import { routes } from './routes';
+
+import "../sass/frontend/styles.scss";
+
+Vue.use(VueRouter);
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
+new Vue({
     el: '#app',
+    router,
+});
 
-    components: { Recipe },
-    data: {
-        recipes: []
-    },
-    mounted() {
-        axios.get('/api/recipes').then(response => this.recipes = response.data);
-    }
-})
+new Vue({
+    router,
+    render: h => h(App)
+}).$mount("#app");

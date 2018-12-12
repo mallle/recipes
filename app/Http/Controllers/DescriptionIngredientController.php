@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Description;
 use Illuminate\Http\Request;
+use App\RecipeIngredients;
 
 class DescriptionIngredientController extends Controller
 {
@@ -33,14 +34,32 @@ class DescriptionIngredientController extends Controller
 
         $ingredient_id = $ingredient_id_type[0];
 
-            $array = [
-                'amount' => $request->get("amount"),
-                'type' => $ingredient_id_type[1]
-            ];
-      
-            $description->ingredients()->attach($ingredient_id, $array);
+        foreach ($description->recipe->ingredients as $ingredient) 
+        {
+            if($ingredient->id == $ingredient_id) 
+                {
+                    // dd((RecipeIngredients::amountPersons($ingredient->pivot->amount, $description->recipe->id)) < ($request->get("amount")));
+                    if((RecipeIngredients::amountPersons($ingredient->pivot->amount, $description->recipe->id)) < ($request->get("amount")))
+                    {
+                        return back()->with(['error' => 'Bitte eine kleinere mänge auswählen']);
+                    }
+                    else
+                    {
 
-            return redirect('descriptions/' . $description_id)->with(['success' => 'Attach was successful']);
+                        $array = [
+                        'amount' => $request->get("amount"),
+                        'type' => $ingredient_id_type[1]
+                        ];
+              
+                        $description->ingredients()->attach($ingredient_id, $array);
 
+                        return redirect('descriptions/' . $description_id)->with(['success' => 'Attach was successful']);
+
+                    } 
+                }
+        }
+    
+
+        
     }
 }
