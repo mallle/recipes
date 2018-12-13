@@ -8,11 +8,13 @@
                             <li>
                                 Rezept: {{ recipe.name}}
                             </li>
+                            <router-link :to="{ name: 'recipe', params: { id: recipe.id }}">{{ recipe.name }}</router-link>
+
                             <li>
                                 Personen: {{ recipe.persons}}
                             </li>
                             <li>
-                                <img src=""> {{ recipe.persons}}
+                                <img src="require({{ recipe.image }})">
                             </li>
                             <li v-for="description in recipe.descriptions">
                                 {{ description.descriptionnumber }}. {{ description.description}}
@@ -43,7 +45,9 @@
 
         },
         mounted() {
+            console.log('test');
             axios.get('/api/recipes').then(response => this.recipes = response.data);
+
         }
 
     }
