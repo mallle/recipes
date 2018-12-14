@@ -12,7 +12,7 @@
             </h4>
             <div class="card__details">
                 <ul>
-                    <slot name="list-item">Listitem</slot>
+                    <slot name="list-item">Listitem {{ counter }}</slot>
                 </ul>
             </div>
         </div>
@@ -34,7 +34,12 @@
 <script>
 
     export default {
-        props: [ 'image']
+        props: [ 'image'],
+        computed: {
+            counter(){
+                return this.$store.state.counter;
+            }
+        }
 
     }
 

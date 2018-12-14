@@ -16,6 +16,8 @@
             </div>
         </div>
 
+        <button @click="increment()">click</button>
+
     </main>
     <!--<section class="section">-->
         <!--<div class="container">-->
@@ -67,6 +69,11 @@
         },
         components: {
             card
+        },
+        methods: {
+            increment() {
+                this.$store.state.counter++
+            }
         }
     }
 </script>
