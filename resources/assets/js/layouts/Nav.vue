@@ -31,12 +31,6 @@
 
     // COLORS
 
-    $color-secondary-light: #ffb900;
-    $color-secondary-dark: #ff7730;
-
-    $color-tertiary-light: #2998ff;
-    $color-tertiary-dark: #5643fa;
-
     $color-grey-light-1: #f7f7f7;
     $color-grey-light-2: #eee;
 
@@ -87,7 +81,6 @@
             top: 0;
             left: 0;
             z-index: 1500;
-
             opacity: 0;
             width: 0;
             transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);

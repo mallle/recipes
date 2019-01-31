@@ -72,7 +72,7 @@
         },
         methods: {
             increment() {
-                this.$store.state.counter++
+                this.$store.state.couter++;
             }
         }
     }

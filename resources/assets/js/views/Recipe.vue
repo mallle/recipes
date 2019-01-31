@@ -1,5 +1,7 @@
 <template>
     <div>
+        <p>Number of Ciks: {{ clicks }}</p>
+        <h1>{{ counter }}</h1>
         <h1>{{ recipe }}</h1>
         <h2 v-for="ingredient in recipe.ingredients">{{ ingredient.name}}</h2>
     </div>
@@ -16,6 +18,14 @@ export default {
         }
     },
 
+    computed: {
+      counter(){
+          return this.$store.state.doubleCounter;
+      },
+        clicks(){
+            return this.$store.state.stingCounter;
+        }
+    },
     created() {
         this.fetchData();
     },
