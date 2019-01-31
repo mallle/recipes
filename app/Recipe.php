@@ -7,9 +7,13 @@ use App\Tag;
 use App\Ingredient;
 use App\Description;
 Use App\Equipment;
+use App\Traits\Orderable;
+
 
 class Recipe extends Model
 {
+
+    use Orderable;
 
     //Relations
     public function equipments()
@@ -26,7 +30,7 @@ class Recipe extends Model
     {
     	return $this -> belongsToMany('\App\Ingredient', 'recipe_ingredient', 'recipe_id', 'ingredient_id')->withPivot('amount', 'type');
     }
-
+g
     public function descriptions()
     {
     	return $this->hasMany('App\Description');
