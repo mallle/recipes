@@ -18,7 +18,7 @@ class Tag extends Model
     	return $this -> belongsToMany('\App\Recipe', 'recipe_tag', 'tag_id', 'recipe_id');
     }
 
-    protected function getType()
+    public function getType()
     {
     	switch ($this->type) 
     	{

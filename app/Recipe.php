@@ -30,7 +30,7 @@ class Recipe extends Model
     {
     	return $this -> belongsToMany('\App\Ingredient', 'recipe_ingredient', 'recipe_id', 'ingredient_id')->withPivot('amount', 'type');
     }
-g
+
     public function descriptions()
     {
     	return $this->hasMany('App\Description');

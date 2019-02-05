@@ -60,4 +60,32 @@ class RecipeIngredients extends Model
     	}
     }
 
+
+    public static function getType($typeNumber)
+    {
+        switch ($typeNumber)
+        {
+            case 1:
+                return 'Gramm';
+            case 2:
+                return 'Stück';
+            case 3:
+                return 'Teelöffel';
+            case 4:
+                return 'Esslöffel';
+            case 5:
+                return 'Liter';
+            case 6:
+                return 'Deciliter';
+            case 7:
+                return 'Milliliter';
+            case 8:
+                return 'Packung';
+            case 9:
+                return 'Scheibe';
+            default:
+                return 'undefined';
+        }
+    }
+
 }

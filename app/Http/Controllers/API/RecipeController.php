@@ -18,6 +18,11 @@ class RecipeController extends Controller
         return RecipeResource::collection($recipes);
 
     }
+
+    public function show(Recipe $recipe) {
+        return new RecipeResource($recipe);
+    }
+
     public function find()
     {
 //        $data = [];

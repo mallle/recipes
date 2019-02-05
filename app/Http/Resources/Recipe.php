@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use App\Http\Resources\Description as DescriptionResource;
+use App\Http\Resources\Ingredient as IngredientResource;
+use App\Http\Resources\Tag as TagResource;
 
 class Recipe extends Resource
 {
@@ -25,9 +28,9 @@ class Recipe extends Resource
                 'bakingtime' => $this->bakingtime,
                 'effort' => $this->effort,
                 'image' => url('/storage/recipes/' . $this->image),
-//                'descriptions' =>
-//                'ingredients' =>
-//                'tags' =>
+                'descriptions' => DescriptionResource::collection($this->descriptions),
+                'ingredients' => IngredientResource::collection($this->ingredients),
+                'tags' => TagResource::collection($this->tags),
         ];
     }
 }
