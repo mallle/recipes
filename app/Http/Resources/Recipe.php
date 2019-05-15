@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\Resource;
 use App\Http\Resources\Description as DescriptionResource;
 use App\Http\Resources\Ingredient as IngredientResource;
 use App\Http\Resources\Tag as TagResource;
+use App\Http\Resources\Equipment as EquipmentResource;
 
 class Recipe extends Resource
 {
@@ -23,6 +24,7 @@ class Recipe extends Resource
                 'id' => $this->id,
         		'name' => $this->name,
                 'persons' => $this->persons,
+                'total' => $this->totalPreparationtime(),
                 'preparationtime' => $this->preparationtime,
                 'resttime' => $this->resttime,
                 'bakingtime' => $this->bakingtime,
@@ -31,6 +33,7 @@ class Recipe extends Resource
                 'descriptions' => DescriptionResource::collection($this->descriptions),
                 'ingredients' => IngredientResource::collection($this->ingredients),
                 'tags' => TagResource::collection($this->tags),
+                'equipment' => EquipmentResource::collection($this->equipments)
         ];
     }
 }

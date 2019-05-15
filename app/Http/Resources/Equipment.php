@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Tag extends Resource
+class Equipment extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,7 @@ class Tag extends Resource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'name' => $this->name,
-            'type' => Tag::getType(),
         ];
     }
 }

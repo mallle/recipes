@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Recipe;
+use App\Tag;
 use App\Http\Resources\Recipe as RecipeResource;
 
 class RecipeController extends Controller
@@ -20,8 +21,24 @@ class RecipeController extends Controller
     }
 
     public function show(Recipe $recipe) {
+
         return new RecipeResource($recipe);
+
     }
+
+    public function tags(Request $request){
+
+        $this->validate($request, [
+           'name' => 'alpha'
+        ]);
+        $tag = Tag::where('name', '=', $request->get('name'))->first();
+
+        $recipes = $tag->recipes()->get();
+
+        return RecipeResource::collection($recipes);
+
+    }
+
 
     public function find()
     {

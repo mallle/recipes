@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use App\Http\Resources\Equipment as EquipmentResource;
+use App\Http\Resources\Ingredient as IngredientResource;
 
 class Description extends Resource
 {
@@ -20,6 +22,8 @@ class Description extends Resource
             'id' => $this->descriptionnumber,
             'descriptionnumber' => $this->descriptionnumber,
             'description' => $this->description,
+            'equipment' => EquipmentResource::collection($this->equipments),
+            'ingredients' => IngredientResource::collection($this->ingredients)
           ];
     }
 }

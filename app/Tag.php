@@ -15,7 +15,7 @@ class Tag extends Model
 
     public function recipes()
     {
-    	return $this -> belongsToMany('\App\Recipe', 'recipe_tag', 'tag_id', 'recipe_id');
+    	return $this->belongsToMany('\App\Recipe', 'recipe_tag', 'tag_id', 'recipe_id');
     }
 
     public function getType()
