@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/recipes', 'API\RecipeController@index');
 Route::get('/recipes/{recipe}', 'API\RecipeController@show');
 
-Route::post('tags/recipes', 'API\RecipeController@tags');
 
 Route::get('/tags', 'API\TagController@index');
+Route::get('tags/{id}/recipes', 'API\TagController@findRecipes');
 
