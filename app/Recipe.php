@@ -7,9 +7,13 @@ use App\Tag;
 use App\Ingredient;
 use App\Description;
 Use App\Equipment;
+use App\Traits\Orderable;
+
 
 class Recipe extends Model
 {
+
+    use Orderable;
 
     //Relations
     public function equipments()

@@ -21,14 +21,15 @@ class RecipeIngredients extends Model
     {
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
-    	return $amount/$persons;
+    	return round($amount/$persons, 2);
     }
 
     public static function amountPersons($amount, $recipe_id)
     {
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
-    	return round((($amount*$persons)*2)/2, 1);
+    	return round($amount*$persons, 2);
+
     }
 
     public static function getTypeNumber($type)
@@ -56,6 +57,34 @@ class RecipeIngredients extends Model
     		default:
     			return 'undefined';
     	}
+    }
+
+
+    public static function getType($typeNumber)
+    {
+        switch ($typeNumber)
+        {
+            case 1:
+                return 'Gramm';
+            case 2:
+                return 'Stück';
+            case 3:
+                return 'Teelöffel';
+            case 4:
+                return 'Esslöffel';
+            case 5:
+                return 'Liter';
+            case 6:
+                return 'Deciliter';
+            case 7:
+                return 'Milliliter';
+            case 8:
+                return 'Packung';
+            case 9:
+                return 'Scheibe';
+            default:
+                return 'undefined';
+        }
     }
 
 }

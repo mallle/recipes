@@ -17,5 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::get('/recipes', 'API\RecipeController@find');
 Route::get('/recipes', 'API\RecipeController@index');
-Route::get('/recipes/{id}', 'API\RecipeController@show');
+Route::get('/recipes/{recipe}', 'API\RecipeController@show');
+
+
+Route::get('/tags', 'API\TagController@index');
+Route::get('tags/{id}/recipes', 'API\TagController@findRecipes');
