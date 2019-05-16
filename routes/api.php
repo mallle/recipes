@@ -24,4 +24,3 @@ Route::get('/recipes/{recipe}', 'API\RecipeController@show');
 
 Route::get('/tags', 'API\TagController@index');
 Route::get('tags/{id}/recipes', 'API\TagController@findRecipes');
-

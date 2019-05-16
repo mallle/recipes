@@ -11,7 +11,7 @@
 	@include('layouts.error')
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-6">
-			
+
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -23,7 +23,7 @@
 							<ul class="list-inline text-right">
 								<li><a href="/recipes/{{$recipe->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a></li>
 								<li>
-									<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}" role="form" novalidate>	
+									<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}" role="form" novalidate>
 											{{ csrf_field() }}
 											{{ method_field('DELETE') }}
 											<button type="submit" class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -54,11 +54,11 @@
 								{{$ingredient->name}}
 							</td>
 							<td>
-								{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}} 
+								{{App\RecipeIngredients::amountPersons($ingredient->pivot->amount, $recipe->id)}}
 								@include('layouts.ingredient-type')
 							</td>
 							<td>
-								<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>	
+								<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_ingredient/{{$ingredient->id}}" role="form" novalidate>
 									{{ csrf_field() }}
 									{{ method_field('DELETE') }}
 									<button class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -75,10 +75,10 @@
 							<td>
 								<ul class="list-inline">
 									<li>
-										<i class="fas fa-tag"></i> {{$equipment->name}}
+										<i class="fas fa-utensils"></i> {{$equipment->name}}
 									</li>
 									<li>
-										<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_equipment/{{$equipment->id}}" role="form" novalidate>	
+										<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_equipment/{{$equipment->id}}" role="form" novalidate>
 										{{ csrf_field() }}
 										{{ method_field('DELETE') }}
 										<button class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -99,7 +99,7 @@
 								<a href="/descriptions/{{$description->id}}/edit" class="btn" ><i class="fas fa-edit"></i></a>
 							</li>
 							<li>
-								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>	
+								<form method="POST" enctype="multipart/form-data" action="/descriptions/{{$description->id}}" role="form" novalidate>
 										{{ csrf_field() }}
 										{{ method_field('DELETE') }}
 									<button class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -113,8 +113,8 @@
 							</ul>
 							@endforeach
 							@foreach($description->equipments as $equipment)
-							<ul>
-								<li>{{ $equipment->name }}</li>
+							<ul >
+								<li><i class="fas fa-utensils"></i></i> {{ $equipment->name }}</li>
 							</ul>
 							@endforeach
 						</ul>
@@ -130,7 +130,7 @@
 										<i class="fas fa-tag"></i> {{$tag->name}}
 									</li>
 									<li>
-										<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_tag/{{$tag->id}}" role="form" novalidate>	
+										<form method="POST" enctype="multipart/form-data" action="/recipes/{{$recipe->id}}/detach_tag/{{$tag->id}}" role="form" novalidate>
 										{{ csrf_field() }}
 										{{ method_field('DELETE') }}
 										<button class="btn"><i class="fas fa-trash-alt"></i></button>
@@ -150,7 +150,7 @@
 				    <h3 class="panel-title">Zutaten hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_ingredient" role="form" novalidate>  
+					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_ingredient" role="form" novalidate>
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
                         <div class="form-group">
@@ -178,7 +178,7 @@
 								<option>Scheibe</option>
 							</select>
 						</div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary">
 	                </form>
 		        </div>
 			</div>
@@ -187,7 +187,7 @@
 				    <h3 class="panel-title">Utensilien hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_equipment" role="form" novalidate>  
+					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_equipment" role="form" novalidate>
 	                            {{ csrf_field() }}
 	                            {{ method_field('POST') }}
 			                <div class="form-group">
@@ -198,7 +198,7 @@
 		                        @endforeach
 		                    </select>
 	               		</div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary">
 	                </form>
 				</div>
 			</div>
@@ -207,7 +207,7 @@
 				    <h3 class="panel-title">Anleitungs schritte hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>  
+					<form method="POST" enctype="multipart/form-data" action="/descriptions/store/{{ $recipe->id }}" role="form" novalidate>
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
                         <div class="form-group">
@@ -218,7 +218,7 @@
 		                  	<label for="description">Anleitungsschritt</label>
 		                  	<input type="text" class="form-control" id="description" name="description" placeholder="Salat wachen...">
 		                </div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary">
 	                </form>
 		        </div>
 			</div>
@@ -227,7 +227,7 @@
 				    <h3 class="panel-title">Tags hinzufügen</h3>
 				  </div>
 				<div class="panel-body">
-					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_tag" role="form" novalidate>  
+					<form method="POST" enctype="multipart/form-data" action="/recipes/{{ $recipe->id }}/attach_tag" role="form" novalidate>
 	                            {{ csrf_field() }}
 	                            {{ method_field('POST') }}
 			                <div class="form-group">
@@ -238,7 +238,7 @@
 		                        @endforeach
 		                    </select>
 	               		</div>
-	                    <input type="submit" value="Hinzufügen" class="btn btn-primary"></input>
+	                    <input type="submit" value="Hinzufügen" class="btn btn-primary">
 	                </form>
 				</div>
 			</div>

@@ -14,11 +14,18 @@
         "bootstrap-sass": "^3.3.7",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^4.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "resolve-url-loader": "2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "7.*",
+        "vue": "^2.5.7",
+        "vue-template-compiler": "^2.5.21"
     },
     "dependencies": {
-        "vue-router": "^3.0.1"
+        "npm": "^6.5.0",
+        "vue-loader": "^15.4.2",
+        "vue-router": "^3.0.2",
+        "vuex": "^3.0.1"
     }
 }

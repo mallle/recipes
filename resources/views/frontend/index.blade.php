@@ -1,45 +1,19 @@
-@extends('frontend.master')
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Meine Rezepte</title>
 
-@section('content')
+		<style rel="stylesheet" href="/css/styles.css"></style>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	</head>
+	<body>
 
-	<div id="app">
-
-
-		<section class="section">
-			<div class="container">
-				<router-view></router-view>
-			</div>
-		</section>
-
-	</div>
-
-
+		<div id="app">
+		</div>
 
 
-			  {{--<h1 class="title" v-for="recipe in recipes">--}}
-			  	{{--<ul>--}}
-			  		{{--<li>--}}
-			  			{{--Rezept: @{{ recipe.name}}--}}
-			  		{{--</li>--}}
-			  		{{--<li>--}}
-			  			{{--Personen: @{{ recipe.persons}}--}}
-			  		{{--</li>--}}
-			  		{{--<li>--}}
-			  			{{--<img src=""> @{{ recipe.persons}}--}}
-			  		{{--</li>--}}
-			  		{{--<li v-for="description in recipe.descriptions">--}}
-			  			{{--@{{ description.descriptionnumber }}. @{{ description.description}}--}}
-			  		{{--</li>--}}
-			  		{{--<li v-for="ingredient in recipe.ingredients">--}}
-			  			{{--@{{ ingredient.name }} Amount:@{{ ingredient.amount}} @{{ingredient.type}}--}}
-			  		{{--</li>--}}
-			  		{{--<li v-for="tag in recipe.tags">--}}
-			  			{{--@{{ tag.name }}--}}
-			  		{{--</li>--}}
-
-			  	{{--</ul>--}}
-
-			  {{--</h1>--}}
-
-
-@endsection
+		<script src="/js/app.js"></script>
+	</body>
+</html>

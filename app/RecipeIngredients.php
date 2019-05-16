@@ -29,6 +29,7 @@ class RecipeIngredients extends Model
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
     	return round($amount*$persons, 2);
+
     }
 
     public static function getTypeNumber($type)

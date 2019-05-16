@@ -1,28 +1,15 @@
-import VueRouter from 'vue-router';
+// import Home from './components/Home.vue'
+// import Example from './components/Example.vue';
+import Recipes from './views/Recipes';
+import Recipe from './views/Recipe';
+import Search from './views/Search';
 
-let routes = [
-    {
-        path: '/',
-        component: require('./views/Recipes.vue')
-    },
+export const routes = [
 
-    {
-        path: '/about',
-        component: require('./views/About')
-    },
+    // { path: '/vue/grid', component: Home, name: 'Home' },
+    // { path: '/vue/example', component: Example, name: 'Example' },
+    { path: '/vue/rezepte', component: Recipes, name: 'Recipes' },
+    { path: '/vue/rezepte/:id', component: Recipe, name: 'recipe' },
+    { path: '/vue/suche', component: Search, name: 'search' }
 
-    {
-        path: '/contact',
-        component: require('./views/Contact')
-    },
-
-    {
-        path: '/exp',
-        component: require('./views/Exp')
-    }
 ];
-
-export default new VueRouter({
-    routes,
-    linkActiveClass: 'is-active'
-});
