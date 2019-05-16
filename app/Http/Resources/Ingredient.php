@@ -3,7 +3,9 @@
 namespace App\Http\Resources;
 
 use App\RecipeIngredients;
+use App\Recipe;
 use Illuminate\Http\Resources\Json\Resource;
+
 
 class Ingredient extends Resource
 {
@@ -15,12 +17,13 @@ class Ingredient extends Resource
      */
     public function toArray($request)
     {
-        //return parent::toArray($request);
 
         return [
             'name' => $this->name,
-            'amount' => $this->pivot->amount,
+            'amount_per_person' => $this->pivot->amount,
             'type' => RecipeIngredients::getType($this->pivot->type),
           ];
+
+
     }
 }

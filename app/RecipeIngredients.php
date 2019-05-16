@@ -21,16 +21,14 @@ class RecipeIngredients extends Model
     {
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
-    	$amount = $amount;
-    	return $amount/$persons;
+    	return round($amount/$persons, 2);
     }
 
     public static function amountPersons($amount, $recipe_id)
     {
     	$recipe = Recipe::find($recipe_id);
     	$persons = $recipe->persons;
-    	$amount = $amount;
-    	return $amount*$persons;
+    	return round($amount*$persons, 2);
     }
 
     public static function getTypeNumber($type)
